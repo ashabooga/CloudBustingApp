@@ -18,6 +18,8 @@
 		0E8749A52C300D3A00821646 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E8749A42C300D3A00821646 /* Assets.xcassets */; };
 		0E8749A82C300D3A00821646 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E8749A72C300D3A00821646 /* Preview Assets.xcassets */; };
 		0E8749B22C3052FE00821646 /* ArticleThumbnailButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8749B12C3052FE00821646 /* ArticleThumbnailButtonView.swift */; };
+		0ED54AFE2C383D7A000CD8B2 /* Glur in Frameworks */ = {isa = PBXBuildFile; productRef = 0ED54AFD2C383D7A000CD8B2 /* Glur */; };
+		0ED54B002C38405C000CD8B2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED54AFF2C38405C000CD8B2 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +35,7 @@
 		0E8749A42C300D3A00821646 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0E8749A72C300D3A00821646 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0E8749B12C3052FE00821646 /* ArticleThumbnailButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleThumbnailButtonView.swift; sourceTree = "<group>"; };
+		0ED54AFF2C38405C000CD8B2 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0ED54AFE2C383D7A000CD8B2 /* Glur in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,6 +96,7 @@
 				0E167D272C31E00900B9263C /* CloudOfTheDayThumbnailButtonView.swift */,
 				0E0833632C37E79F00FD73AB /* ExpandableTextView.swift */,
 				0E167D252C31DFD200B9263C /* BlurView.swift */,
+				0ED54AFF2C38405C000CD8B2 /* Extensions.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -128,6 +133,9 @@
 			dependencies = (
 			);
 			name = CloudBusting;
+			packageProductDependencies = (
+				0ED54AFD2C383D7A000CD8B2 /* Glur */,
+			);
 			productName = CloudBusting;
 			productReference = 0E87499D2C300D3400821646 /* CloudBusting.app */;
 			productType = "com.apple.product-type.application";
@@ -156,6 +164,9 @@
 				Base,
 			);
 			mainGroup = 0E8749942C300D3400821646;
+			packageReferences = (
+				0ED54AFC2C383D7A000CD8B2 /* XCRemoteSwiftPackageReference "Glur" */,
+			);
 			productRefGroup = 0E87499E2C300D3400821646 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -187,6 +198,7 @@
 				0E0833622C35455300FD73AB /* CloudInfoCardView.swift in Sources */,
 				0E167D2A2C31E06300B9263C /* CloudModel.swift in Sources */,
 				0E0833642C37E79F00FD73AB /* ExpandableTextView.swift in Sources */,
+				0ED54B002C38405C000CD8B2 /* Extensions.swift in Sources */,
 				0E8749B22C3052FE00821646 /* ArticleThumbnailButtonView.swift in Sources */,
 				0E167D262C31DFD200B9263C /* BlurView.swift in Sources */,
 				0E167D242C31B8C700B9263C /* ArticleModel.swift in Sources */,
@@ -396,6 +408,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		0ED54AFC2C383D7A000CD8B2 /* XCRemoteSwiftPackageReference "Glur" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/joogps/Glur";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.4;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0ED54AFD2C383D7A000CD8B2 /* Glur */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0ED54AFC2C383D7A000CD8B2 /* XCRemoteSwiftPackageReference "Glur" */;
+			productName = Glur;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 0E8749952C300D3400821646 /* Project object */;
 }

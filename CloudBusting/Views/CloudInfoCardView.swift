@@ -76,7 +76,8 @@ struct CloudInfoView: View {
                         .padding(.top, 40)
                         .padding(.horizontal, 25)
                         
-                        
+                        ExpandableTextView(text: cloud.aboutInfo)
+                            .padding(.horizontal)
                         
                         Text("Images")
                             .font(.title)
