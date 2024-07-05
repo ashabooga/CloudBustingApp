@@ -79,11 +79,21 @@ struct CloudInfoView: View {
                         ExpandableTextView(text: cloud.aboutInfo)
                             .padding(.horizontal)
                         
-                        Text("Images")
-                            .font(.title)
-                            .bold()
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.horizontal, 25)
+                        HStack {
+                            
+                            Image(systemName: "photo.on.rectangle.angled")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(height: 35)
+                            
+                            Text("Images")
+                                .font(.title)
+                                .bold()
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(.leading, 5)
+                        }
+                        .padding(.horizontal, 25)
+                        .padding(.top)
                         
                         ScrollView(.horizontal, content: {
                             LazyHStack(content: {
@@ -101,6 +111,21 @@ struct CloudInfoView: View {
                         })
                         .scrollIndicators(.hidden)
                         
+                        HStack {
+                            
+                            Image(systemName: "cloud.circle")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(height: 35)
+                            
+                            Text("Key Information")
+                                .font(.title)
+                                .bold()
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(.leading, 5)
+                        }
+                        .padding(.horizontal, 25)
+                        .padding(.top)
                         
                     }
                 }
