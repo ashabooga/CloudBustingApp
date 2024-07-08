@@ -129,6 +129,7 @@ extension CloudInfoView {
         }
         .padding(.top, 40)
         .padding(.horizontal, 25)
+        .frame(maxHeight: 100)
     }
     
     private var imagesTitle: some View {
@@ -137,7 +138,6 @@ extension CloudInfoView {
             .bold()
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.leading, 25)
-            .padding(.top)
     }
     
     private var imagesSection: some View {
@@ -185,21 +185,84 @@ extension CloudInfoView {
             
             HStack {
                 VStack {
-                    RoundedRectangle(cornerRadius: 25)
-                        .foregroundStyle(.darkColor1)
+                    HStack {
+                        Image(systemName: "barometer")
+                        
+                        Text("Altitude")
+                            .font(.headline)
+                            .bold()
+                        
+                        Spacer()
+                    }
+                    .foregroundStyle(.black)
+                    .opacity(0.5)
+                    .padding()
+                    
+                    Spacer()
                 }
+                .frame(width: 175, height: 370)
+                .background(Color.darkColor1)
+                .clipShape(RoundedRectangle(cornerRadius: 25))
                 .padding(.trailing, 5)
                 
+                
+                
                 VStack {
-                    RoundedRectangle(cornerRadius: 25)
-                        .foregroundStyle(.darkColor1)
-                        .padding(.bottom, 5)
+                    VStack {
+                        HStack {
+                            Image(systemName: "drop")
+                            
+                            Text("Precipitation")
+                                .font(.headline)
+                                .bold()
+                            
+                            Spacer()
+                        }
+                        .foregroundStyle(.black)
+                        .opacity(0.5)
+                        .padding()
+                        
+                        Gauge(value: 10, in: 0...100) {
+                            Image(systemName: "umbrella.fill")
+                        } currentValueLabel: {
+                            Text("Unlikely")
+                        }
+                        .gaugeStyle(.accessoryCircular)
+                        .frame(width: 100, height: 100)
+                        
+                        Spacer()
+
+                        
+                    }
+                    .frame(width: 175, height: 175)
+                    .background(Color.darkColor1)
+                    .clipShape(RoundedRectangle(cornerRadius: 25))
+                    .padding(.bottom, 5)
                     
-                    RoundedRectangle(cornerRadius: 25)
-                        .foregroundStyle(.darkColor1)
-                        .padding(.top, 5)
+                    VStack {
+                        HStack {
+                            Image(systemName: "smoke")
+                            
+                            Text("Color")
+                                .font(.headline)
+                                .bold()
+                            
+                            Spacer()
+                        }
+                        .foregroundStyle(.black)
+                        .opacity(0.5)
+                        .padding()
+                        
+                        Spacer()
+                        
+                    }
+                    .frame(width: 175, height: 175)
+                    .background(Color.darkColor1)
+                    .clipShape(RoundedRectangle(cornerRadius: 25))
+                    .padding(.top, 5)
                 }
                 .padding(.leading, 5)
+                
             }
             .padding()
             .frame(height: 400)
