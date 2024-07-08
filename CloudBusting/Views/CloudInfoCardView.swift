@@ -171,7 +171,7 @@ extension CloudInfoView {
     private var keyInformationSection: some View {
         VStack {
             
-            Text("The Cumulus cloud stays at low altitudes with potential to go higher, has a low precipitation chance, and is light gray in color.")
+            Text("The Cumulus cloud stays at low altitudes with potential to go higher, has a low precipitation chance, and is white to light gray in color.")
                 .font(.callout)
                 .foregroundColor(Color.gray)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -222,13 +222,15 @@ extension CloudInfoView {
                         .opacity(0.5)
                         .padding()
                         
+                        Spacer()
+                        
                         Gauge(value: 10, in: 0...100) {
                             Image(systemName: "umbrella.fill")
                         } currentValueLabel: {
                             Text("Unlikely")
                         }
                         .gaugeStyle(.accessoryCircular)
-                        .frame(width: 100, height: 100)
+                        .padding(.bottom)
                         
                         Spacer()
 
@@ -252,6 +254,15 @@ extension CloudInfoView {
                         .foregroundStyle(.black)
                         .opacity(0.5)
                         .padding()
+                        
+                        Spacer()
+                        
+                        Image(systemName: "cloud.fill")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 100)
+                            .foregroundStyle(.linearGradient(colors: [.white, .gray], startPoint: .leading, endPoint: .trailing))
+                            .padding(.bottom, 25)
                         
                         Spacer()
                         
