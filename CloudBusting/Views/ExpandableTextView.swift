@@ -52,6 +52,7 @@ struct ExpandableTextView: View {
             .padding(.horizontal)
             .padding(.vertical, showFullText ? -12 : 10)
         }
+        .padding(.bottom, showFullText ? 30 : 10)
         
     }
     

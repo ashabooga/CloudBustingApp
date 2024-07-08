@@ -20,6 +20,8 @@
 		0E8749B22C3052FE00821646 /* ArticleThumbnailButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8749B12C3052FE00821646 /* ArticleThumbnailButtonView.swift */; };
 		0ED54AFE2C383D7A000CD8B2 /* Glur in Frameworks */ = {isa = PBXBuildFile; productRef = 0ED54AFD2C383D7A000CD8B2 /* Glur */; };
 		0ED54B002C38405C000CD8B2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED54AFF2C38405C000CD8B2 /* Extensions.swift */; };
+		0ED54B022C3925D8000CD8B2 /* StretchingHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED54B012C3925D8000CD8B2 /* StretchingHeaderView.swift */; };
+		0ED54B042C39993A000CD8B2 /* WeatherBentoGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED54B032C39993A000CD8B2 /* WeatherBentoGridView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		0E8749A72C300D3A00821646 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0E8749B12C3052FE00821646 /* ArticleThumbnailButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleThumbnailButtonView.swift; sourceTree = "<group>"; };
 		0ED54AFF2C38405C000CD8B2 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		0ED54B012C3925D8000CD8B2 /* StretchingHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StretchingHeaderView.swift; sourceTree = "<group>"; };
+		0ED54B032C39993A000CD8B2 /* WeatherBentoGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherBentoGridView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +98,8 @@
 				0E0833612C35455300FD73AB /* CloudInfoCardView.swift */,
 				0E8749B12C3052FE00821646 /* ArticleThumbnailButtonView.swift */,
 				0E167D272C31E00900B9263C /* CloudOfTheDayThumbnailButtonView.swift */,
+				0ED54B032C39993A000CD8B2 /* WeatherBentoGridView.swift */,
+				0ED54B012C3925D8000CD8B2 /* StretchingHeaderView.swift */,
 				0E0833632C37E79F00FD73AB /* ExpandableTextView.swift */,
 				0E167D252C31DFD200B9263C /* BlurView.swift */,
 				0ED54AFF2C38405C000CD8B2 /* Extensions.swift */,
@@ -194,10 +200,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E167D282C31E00900B9263C /* CloudOfTheDayThumbnailButtonView.swift in Sources */,
+				0ED54B022C3925D8000CD8B2 /* StretchingHeaderView.swift in Sources */,
 				0E8749A32C300D3400821646 /* HomeView.swift in Sources */,
 				0E0833622C35455300FD73AB /* CloudInfoCardView.swift in Sources */,
 				0E167D2A2C31E06300B9263C /* CloudModel.swift in Sources */,
 				0E0833642C37E79F00FD73AB /* ExpandableTextView.swift in Sources */,
+				0ED54B042C39993A000CD8B2 /* WeatherBentoGridView.swift in Sources */,
 				0ED54B002C38405C000CD8B2 /* Extensions.swift in Sources */,
 				0E8749B22C3052FE00821646 /* ArticleThumbnailButtonView.swift in Sources */,
 				0E167D262C31DFD200B9263C /* BlurView.swift in Sources */,
