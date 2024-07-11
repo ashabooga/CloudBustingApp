@@ -29,8 +29,10 @@ struct ExpandableTextView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
         }
         .background {
-            RoundedRectangle(cornerRadius: 25)
-                .foregroundStyle(.darkColor1)
+//            RoundedRectangle(cornerRadius: 25)
+//                .foregroundStyle(.darkColor1)
+            ColoredGlassView(centerUnitPoint: .topLeading, radius: 2000)
+                .clipShape(RoundedRectangle(cornerRadius: 25))
                 .padding(.bottom, showFullText ? -20 : 0)
         }
         .if(!showFullText) { view in

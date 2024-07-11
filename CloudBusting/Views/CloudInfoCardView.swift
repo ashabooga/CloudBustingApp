@@ -14,6 +14,9 @@ struct CloudInfoCardView: View {
     
     var body: some View {
         ZStack(alignment: .top) {
+            
+            Color.darkColor1.ignoresSafeArea()
+            
             Image("Cindy-Otter")
                 .resizable()
                 .aspectRatio(contentMode: .fill)
@@ -33,13 +36,14 @@ struct CloudInfoCardView: View {
                         .clipShape(
                             .rect(topLeadingRadius: 25, topTrailingRadius: 25)
                         )
-                        .ignoresSafeArea()
                 }
-                .onScrollGeometryChange(for: CGFloat.self, of: { geo in
-                    return geo.contentOffset.y + geo.contentInsets.top
-                }, action: { new, old in
-                    offset = new
-                })
+                .ignoresSafeArea(edges: .bottom)
+                .frame(maxHeight: .infinity)
+//                .onScrollGeometryChange(for: CGFloat.self, of: { geo in
+//                    return geo.contentOffset.y + geo.contentInsets.top
+//                }, action: { new, old in
+//                    offset = new
+//                })
             } else {
                 
             }
@@ -88,21 +92,65 @@ struct CloudInfoView: View {
                 
                 keyInformationSection
                 
-                Text("Weather 🌧️")
-                    .font(.title)
-                    .bold()
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.leading, 25)
-                    .padding(.top)
+                identificationTitle
+                
+                identificationSection
+                
+                similarCloudsTitle
+                
+                lookOutForTitle
+                
+                formationAndDevelopmentTitle
+                
+                historicalInformationTitle
+                
+                associatedArticlesTitle
                 
                 
                 
                 
                 
-                TestView()
+//                TestView()
             }
         }
-        .frame(maxHeight: .infinity)
+    }
+}
+
+struct CloudIdentificationViewRow: View {
+    
+    let SFSymbol: String
+    let title: String
+    let content: String
+    
+    var body: some View {
+        VStack {
+            VStack {
+                HStack {
+                    Image(systemName: SFSymbol)
+                    
+                    Text(title)
+                        .bold()
+                    
+                    Spacer()
+                }
+                .font(.title3)
+                .foregroundStyle(.black)
+                .opacity(0.5)
+            }
+            .padding()
+            
+            Text(content)
+                .font(.callout)
+                .foregroundColor(Color.gray)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.horizontal, 20)
+                .padding(.bottom)
+        }
+        .background(Color.darkColor1)
+        .clipShape(RoundedRectangle(cornerRadius: 15))
+        .padding(.horizontal)
+        .padding(.bottom)
     }
 }
 
@@ -160,7 +208,7 @@ extension CloudInfoView {
     }
     
     private var keyInformationTitle: some View {
-        Text("Key Information ☁️")
+        Text("Key Information ℹ️")
             .font(.title)
             .bold()
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -176,10 +224,8 @@ extension CloudInfoView {
                 .foregroundColor(Color.gray)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
-                .background {
-                    RoundedRectangle(cornerRadius: 15)
-                        .foregroundStyle(.darkColor1)
-                }
+                .background (ColoredGlassView(centerUnitPoint: .topLeading, radius: 1500))
+                .clipShape(RoundedRectangle(cornerRadius: 25))
                 .padding(.horizontal)
                 .fixedSize(horizontal: false, vertical: true)
             
@@ -201,7 +247,7 @@ extension CloudInfoView {
                     Spacer()
                 }
                 .frame(width: 175, height: 370)
-                .background(Color.darkColor1)
+                .background(ColoredGlassView(centerUnitPoint: .topLeading, radius: 1500))
                 .clipShape(RoundedRectangle(cornerRadius: 25))
                 .padding(.trailing, 5)
                 
@@ -237,7 +283,7 @@ extension CloudInfoView {
                         
                     }
                     .frame(width: 175, height: 175)
-                    .background(Color.darkColor1)
+                    .background(ColoredGlassView(centerUnitPoint: .topLeading, radius: 700))
                     .clipShape(RoundedRectangle(cornerRadius: 25))
                     .padding(.bottom, 5)
                     
@@ -262,13 +308,14 @@ extension CloudInfoView {
                             .scaledToFit()
                             .frame(width: 100)
                             .foregroundStyle(.linearGradient(colors: [.white, .gray], startPoint: .leading, endPoint: .trailing))
+                            .shadow(radius: 10)
                             .padding(.bottom, 25)
                         
                         Spacer()
                         
                     }
                     .frame(width: 175, height: 175)
-                    .background(Color.darkColor1)
+                    .background(ColoredGlassView(centerUnitPoint: .topLeading, radius: 700))
                     .clipShape(RoundedRectangle(cornerRadius: 25))
                     .padding(.top, 5)
                 }
@@ -280,7 +327,93 @@ extension CloudInfoView {
         }
     }
     
+    private var identificationTitle: some View {
+        Text("Identification ⛅️")
+            .font(.title)
+            .bold()
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.leading, 25)
+            .padding(.top)
+    }
+    
+    private var identificationSection: some View {
+        VStack {
+            CloudIdentificationViewRow(SFSymbol: "cloud.circle", title: "Shape", content: "Fluffy, cotton-like appearance with a clearly defined base.")
+            
+            CloudIdentificationViewRow(SFSymbol: "viewfinder", title: "Edges", content: "Rounded and well-defined.")
+            
+            CloudIdentificationViewRow(SFSymbol: "arrow.down.left.and.arrow.up.right", title: "Size", content: "Varies from small puffs to large, towering formations.")
+            
+            CloudIdentificationViewRow(SFSymbol: "paintpalette", title: "Color", content: "Typically white, but can have darker bases if rain is imminent.")
+            
+            CloudIdentificationViewRow(SFSymbol: "location", title: "Location", content: "Usually found at lower altitudes, often on fair weather days.")
+        }
+    }
+    
+    private var historicalInformationTitle: some View {
+        Text("Historical Information 🏛️")
+            .font(.title)
+            .bold()
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.leading, 25)
+            .padding(.top)
+    }
+    
+    private var similarCloudsTitle: some View {
+        Text("Don't Confuse With 🚫")
+            .font(.title)
+            .bold()
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.leading, 25)
+            .padding(.top)
+    }
+    
+    private var similarCloudsSection: some View {
+        EmptyView()
+    }
+    
+    private var lookOutForTitle: some View {
+        Text("Also Look For 👀")
+            .font(.title)
+            .bold()
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.leading, 25)
+            .padding(.top)
+    }
+    
+    private var lookOutForSection: some View {
+        EmptyView()
+    }
+    
+    private var associatedArticlesTitle: some View {
+        Text("Mentioned In 📖")
+            .font(.title)
+            .bold()
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.leading, 25)
+            .padding(.top)
+    }
+    
+    private var associatedArticlesSection: some View {
+        EmptyView()
+    }
+    
+    private var formationAndDevelopmentTitle: some View {
+        Text("Cloud Formation ☁️")
+            .font(.title)
+            .bold()
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.leading, 25)
+            .padding(.top)
+    }
+    
+    private var formationAndDevelopmentSection: some View {
+        EmptyView()
+    }
+    
 }
+
+
 
 #Preview {
     CloudInfoCardView(cloud: CloudModel.Cumulus)
