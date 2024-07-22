@@ -113,7 +113,13 @@ struct CloudInfoView: View {
                 
                 similarCloudsSection
                 
-                lookOutForTitle
+                NavigationLink {
+                    EmptyView()
+                } label: {
+                    lookOutForTitle
+                }
+                
+                lookOutForSection
                 
                 formationAndDevelopmentTitle
                 
@@ -210,6 +216,67 @@ struct SimilarCloudCardView: View {
         }
         .clipShape(RoundedRectangle(cornerRadius: 25))
         .shadow(radius: 10)
+    }
+}
+
+struct lookOutForCloudCardView: View {
+    
+    let image: String
+    let name: String
+    
+    var body: some View {
+        
+        ZStack {
+//            
+//            ColoredGlassView(centerUnitPoint: .top, radius: 1500)
+//                .ignoresSafeArea()
+//            
+//            VStack {
+//                Image(image)
+//                    .resizable()
+//                    .aspectRatio(contentMode: .fill)
+//                    .frame(height: 200)
+//                    .clipped()
+//                
+//
+//                Text(name)
+//                    .font(.title2)
+//                    .bold()
+//                    .frame(maxWidth: .infinity, alignment: .leading)
+//                    .padding(.leading, 25)
+//                    .padding(.top)
+//                
+//            }
+//            .foregroundStyle(.nonInteractiveText)
+//            .multilineTextAlignment(.leading)
+//            .padding(.bottom)
+            
+            
+            Image(image)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(height: 200)
+                .clipped()
+                .glur(offset: 0.45, interpolation: 0.6)
+            
+            VStack {
+                Spacer()
+
+                Text(name)
+                    .font(.title2)
+                    .bold()
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.leading, 25)
+                    .padding(.top)
+                    .foregroundStyle(.nonInteractiveText)
+                    .padding(.bottom)
+            }
+            
+            
+        }
+        .clipShape(RoundedRectangle(cornerRadius: 25))
+        .shadow(radius: 10)
+        
     }
 }
 
@@ -494,16 +561,48 @@ extension CloudInfoView {
     }
     
     private var lookOutForTitle: some View {
-        Text("Also Look For 👀")
-            .font(.title)
-            .bold()
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.leading, 25)
-            .padding(.top)
+        HStack {
+            Text("Also Look For 👀")
+                .foregroundStyle(.nonInteractiveText)
+                
+            Spacer()
+            
+            Image(systemName: "chevron.right")
+                .padding(.trailing)
+                .font(.title2)
+                .foregroundStyle(.interactiveText)
+        }
+        .font(.title)
+        .bold()
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.leading, 25)
+        .padding(.top)
+        .padding(.bottom, -5)
     }
     
     private var lookOutForSection: some View {
-        EmptyView()
+        ScrollView(.horizontal) {
+            LazyHStack(spacing: 0) {
+                ForEach(1...4, id: \.self) { count in
+                    NavigationLink {
+                        EmptyView()
+                    } label: {
+                        lookOutForCloudCardView(image: "Mammatus2", name: "Mamma Clouds")
+                            .frame(width: UIScreen.main.bounds.width - 50)
+                            .padding(.horizontal, 5)
+                            .scrollTransition { content, phase in
+                                content
+                                    .opacity(phase.isIdentity ? 1 : 0.9)
+                                    .scaleEffect(y: phase.isIdentity ? 1 : 0.95)
+                            }
+                    }
+                }
+            }
+            .scrollTargetLayout()
+        }
+        .scrollIndicators(.hidden)
+        .scrollTargetBehavior(.viewAligned)
+        .contentMargins(20, for: .scrollContent)
     }
     
     private var associatedArticlesTitle: some View {
@@ -538,4 +637,6 @@ extension CloudInfoView {
 
 #Preview {
     CloudInfoCardView(cloud: CloudModel.Cumulus)
+    
+//    lookOutForCloudCardView(image: "Mammatus1", name: "Mamma Clouds")
 }
