@@ -300,6 +300,11 @@ extension CloudInfoView {
             
             
             Spacer()
+            
+            Image(systemName: "square.and.arrow.up.circle.fill")
+                .font(.largeTitle)
+                .foregroundStyle(.paragraphText)
+                .bold()
         }
         .padding(.top, 40)
         .padding(.horizontal, 25)
@@ -583,7 +588,7 @@ extension CloudInfoView {
     private var lookOutForSection: some View {
         ScrollView(.horizontal) {
             LazyHStack(spacing: 0) {
-                ForEach(1...4, id: \.self) { count in
+                ForEach(1...2, id: \.self) { count in
                     NavigationLink {
                         EmptyView()
                     } label: {
@@ -637,6 +642,4 @@ extension CloudInfoView {
 
 #Preview {
     CloudInfoCardView(cloud: CloudModel.Cumulus)
-    
-//    lookOutForCloudCardView(image: "Mammatus1", name: "Mamma Clouds")
 }
