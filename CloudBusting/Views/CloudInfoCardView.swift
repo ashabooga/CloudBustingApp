@@ -13,40 +13,42 @@ struct CloudInfoCardView: View {
     @State private var offset: CGFloat = 0
     
     var body: some View {
-        ZStack(alignment: .top) {
-            
-            Color.darkColor1.ignoresSafeArea()
-            
-            Image("Cindy-Otter")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(height: 300 + max(0, -offset))
-                .clipped()
-                .transformEffect(.init(translationX: 0, y: -(max(0, offset))))
-                .ignoresSafeArea()
-            
-            if #available(iOS 18.0, *) {
-                ScrollView {
-                    
-                    Rectangle()
-                        .fill(Color.clear)
-                        .frame(height: 200)
-                    
-                    CloudInfoView(cloud: cloud)
-                        .clipShape(
-                            .rect(topLeadingRadius: 25, topTrailingRadius: 25)
-                        )
-                        .padding(.bottom, 25)
-                }
-                .ignoresSafeArea(edges: .bottom)
-                .frame(maxHeight: .infinity)
-//                .onScrollGeometryChange(for: CGFloat.self, of: { geo in
-//                    return geo.contentOffset.y + geo.contentInsets.top
-//                }, action: { new, old in
-//                    offset = new
-//                })
-            } else {
+        NavigationStack {
+            ZStack(alignment: .top) {
                 
+                Color.darkColor1.ignoresSafeArea()
+                
+                Image("Cindy-Otter")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(height: 300 + max(0, -offset))
+                    .clipped()
+                    .transformEffect(.init(translationX: 0, y: -(max(0, offset))))
+                    .ignoresSafeArea()
+                
+                if #available(iOS 18.0, *) {
+                    ScrollView {
+                        
+                        Rectangle()
+                            .fill(Color.clear)
+                            .frame(height: 200)
+                        
+                        CloudInfoView(cloud: cloud)
+                            .clipShape(
+                                .rect(topLeadingRadius: 25, topTrailingRadius: 25)
+                            )
+                            .padding(.bottom, 25)
+                    }
+                    .ignoresSafeArea(edges: .bottom)
+                    .frame(maxHeight: .infinity)
+    //                .onScrollGeometryChange(for: CGFloat.self, of: { geo in
+    //                    return geo.contentOffset.y + geo.contentInsets.top
+    //                }, action: { new, old in
+    //                    offset = new
+    //                })
+                } else {
+                    
+                }
             }
         }
     }
@@ -85,7 +87,12 @@ struct CloudInfoView: View {
                 ExpandableTextView(text: cloud.aboutInfo)
                     .padding(.horizontal)
                 
-                imagesTitle
+                
+                NavigationLink {
+                    EmptyView()
+                } label: {
+                    imagesTitle
+                }
                 
                 imagesSection
                 
@@ -97,7 +104,12 @@ struct CloudInfoView: View {
                 
                 identificationSection
                 
-                similarCloudsTitle
+                NavigationLink {
+                    EmptyView()
+                } label: {
+                    similarCloudsTitle
+                }
+
                 
                 similarCloudsSection
                 
@@ -192,6 +204,8 @@ struct SimilarCloudCardView: View {
                     .padding(.vertical, 10)
                 
             }
+            .foregroundStyle(.nonInteractiveText)
+            .multilineTextAlignment(.leading)
             .padding(.bottom)
         }
         .clipShape(RoundedRectangle(cornerRadius: 25))
@@ -228,6 +242,7 @@ extension CloudInfoView {
     private var imagesTitle: some View {
         HStack {
             Text("Images 📸")
+                .foregroundStyle(.nonInteractiveText)
                 
             Spacer()
             
@@ -417,9 +432,9 @@ extension CloudInfoView {
                 .padding(.bottom)
         }
         .background(ColoredGlassView(centerUnitPoint: .topLeading, radius: 2000))
-//        .thinBorder()
         .clipShape(RoundedRectangle(cornerRadius: 25))
         .padding(.horizontal)
+        .padding(.bottom)
         .shadow(radius: 1)
     }
     
@@ -433,12 +448,23 @@ extension CloudInfoView {
     }
     
     private var similarCloudsTitle: some View {
-        Text("Don't Confuse With 🚫")
-            .font(.title)
-            .bold()
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.leading, 25)
-            .padding(.top)
+        HStack {
+            Text("Don't Confuse With 🚫")
+                .foregroundStyle(.nonInteractiveText)
+                
+            Spacer()
+            
+            Image(systemName: "chevron.right")
+                .padding(.trailing)
+                .font(.title2)
+                .foregroundStyle(.interactiveText)
+        }
+        .font(.title)
+        .bold()
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.leading, 25)
+        .padding(.top)
+        .padding(.bottom, -5)
     }
     
     private var similarCloudsSection: some View {
@@ -446,14 +472,18 @@ extension CloudInfoView {
         ScrollView(.horizontal) {
             LazyHStack(spacing: 0) {
                 ForEach(1...4, id: \.self) { count in
-                    SimilarCloudCardView(image: "Mammatus1", name: "Mamma Clouds", description: "Mamma clouds and cumulus clouds are similar in shape and size but mamma clouds are identifyable by their large bulbs hanging from the bottom of their cloud.")
-                        .frame(width: UIScreen.main.bounds.width - 50)
-                        .padding(.horizontal, 5)
-                        .scrollTransition { content, phase in
-                            content
-                                .opacity(phase.isIdentity ? 1 : 0.9)
-                                .scaleEffect(y: phase.isIdentity ? 1 : 0.95)
-                        }
+                    NavigationLink {
+                        EmptyView()
+                    } label: {
+                        SimilarCloudCardView(image: "Mammatus1", name: "Mamma Clouds", description: "Mamma clouds and cumulus clouds are similar in shape and size but mamma clouds are identifyable by their large bulbs hanging from the bottom of their cloud.")
+                            .frame(width: UIScreen.main.bounds.width - 50)
+                            .padding(.horizontal, 5)
+                            .scrollTransition { content, phase in
+                                content
+                                    .opacity(phase.isIdentity ? 1 : 0.9)
+                                    .scaleEffect(y: phase.isIdentity ? 1 : 0.95)
+                            }
+                    }
                 }
             }
             .scrollTargetLayout()
