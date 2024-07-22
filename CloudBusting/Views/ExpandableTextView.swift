@@ -22,22 +22,22 @@ struct ExpandableTextView: View {
                 Text(text)
                     .lineLimit(showFullText ? nil : 4)
                     .font(.callout)
-                    .foregroundColor(Color.gray)
+                    .foregroundColor(.paragraphText)
                     .padding()
                     .animation(showFullText ? Animation.easeInOut : .none, value: showFullText)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.bottom, showFullText ? 20 : 0)
         }
         .background {
 //            RoundedRectangle(cornerRadius: 25)
 //                .foregroundStyle(.darkColor1)
-            ColoredGlassView(centerUnitPoint: .topLeading, radius: 2000)
-                .clipShape(RoundedRectangle(cornerRadius: 25))
-                .padding(.bottom, showFullText ? -20 : 0)
+            ColoredGlassView(centerUnitPoint: .topLeading, radius: 4000)
         }
         .if(!showFullText) { view in
-            view.glur(offset: 0.5, interpolation: 0.3)
+            view.glur(offset: 0.45, interpolation: 0.6)
         }
+        .clipShape(RoundedRectangle(cornerRadius: 25))
         .overlay {
             Button(action: {
                 withAnimation(.easeInOut) {
@@ -46,13 +46,14 @@ struct ExpandableTextView: View {
             }, label: {
                 Text(showFullText ? "Less" : "Read more..")
                     .font(.callout)
+                    .foregroundStyle(.interactiveText)
                     .fontWeight(.bold)
                     .padding(.vertical, 4)
             })
             .accentColor(.blue)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
             .padding(.horizontal)
-            .padding(.vertical, showFullText ? -12 : 10)
+            .padding(.vertical, showFullText ? 9 : 10)
         }
         .padding(.bottom, showFullText ? 30 : 10)
         

@@ -36,6 +36,7 @@ struct CloudInfoCardView: View {
                         .clipShape(
                             .rect(topLeadingRadius: 25, topTrailingRadius: 25)
                         )
+                        .padding(.bottom, 25)
                 }
                 .ignoresSafeArea(edges: .bottom)
                 .frame(maxHeight: .infinity)
@@ -73,7 +74,7 @@ struct CloudInfoView: View {
             LinearGradient(gradient: Gradient(colors: [Color.lightColor1, Color.clear]), startPoint: .topLeading, endPoint: .bottomTrailing)
                 .ignoresSafeArea()
             
-            VStack {
+            LazyVStack {
                 
                 overviewTitle
                 
@@ -98,6 +99,8 @@ struct CloudInfoView: View {
                 
                 similarCloudsTitle
                 
+                similarCloudsSection
+                
                 lookOutForTitle
                 
                 formationAndDevelopmentTitle
@@ -105,6 +108,7 @@ struct CloudInfoView: View {
                 historicalInformationTitle
                 
                 associatedArticlesTitle
+                
                 
                 
                 
@@ -140,17 +144,58 @@ struct CloudIdentificationViewRow: View {
             .padding()
             
             Text(content)
-                .font(.callout)
-                .foregroundColor(Color.gray)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .fixedSize(horizontal: false, vertical: true)
-                .padding(.horizontal, 20)
-                .padding(.bottom)
+                .paragraphText()
+                .padding(.horizontal)
         }
-        .background(Color.darkColor1)
-        .clipShape(RoundedRectangle(cornerRadius: 15))
         .padding(.horizontal)
         .padding(.bottom)
+    }
+}
+
+struct SimilarCloudCardView: View {
+    
+    let image: String
+    let name: String
+    let description: String
+    
+    var body: some View {
+        
+        
+        ZStack {
+            
+            ColoredGlassView(centerUnitPoint: .top, radius: 1500)
+                .ignoresSafeArea()
+            
+            VStack {
+                Image(image)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(height: 200)
+                    .clipped()
+                
+                HStack {
+                    Image(systemName: "exclamationmark.triangle.fill")
+                    
+                    Text(name)
+
+                    Spacer()
+                }
+                .font(.title2)
+                .bold()
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.leading, 25)
+                .padding(.top)
+                
+                Text(description)
+                    .paragraphText()
+                    .padding(.horizontal, 25)
+                    .padding(.vertical, 10)
+                
+            }
+            .padding(.bottom)
+        }
+        .clipShape(RoundedRectangle(cornerRadius: 25))
+        .shadow(radius: 10)
     }
 }
 
@@ -181,16 +226,25 @@ extension CloudInfoView {
     }
     
     private var imagesTitle: some View {
-        Text("Images 📸")
-            .font(.title)
-            .bold()
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.leading, 25)
+        HStack {
+            Text("Images 📸")
+                
+            Spacer()
+            
+            Image(systemName: "chevron.right")
+                .padding(.trailing)
+                .font(.title2)
+                .foregroundStyle(.interactiveText)
+        }
+        .font(.title)
+        .bold()
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.leading, 25)
     }
     
     private var imagesSection: some View {
         ScrollView(.horizontal, content: {
-            LazyHStack(content: {
+            LazyHStack(spacing: 0, content: {
                 ForEach(1..<cloud.images.count, id: \.self) { count in
                     Image(cloud.images[count])
                         .resizable()
@@ -201,10 +255,12 @@ extension CloudInfoView {
                 }
                 .padding(.horizontal, 5)
             })
-            .padding()
+            .scrollTargetLayout()
+            .padding(.horizontal)
         })
         .scrollIndicators(.hidden)
-        .frame(maxHeight: 200)
+        .scrollTargetBehavior(.viewAligned)
+        .padding(.bottom)
     }
     
     private var keyInformationTitle: some View {
@@ -220,9 +276,7 @@ extension CloudInfoView {
         VStack {
             
             Text("The Cumulus cloud stays at low altitudes with potential to go higher, has a low precipitation chance, and is white to light gray in color.")
-                .font(.callout)
-                .foregroundColor(Color.gray)
-                .frame(maxWidth: .infinity, alignment: .leading)
+                .paragraphText()
                 .padding()
                 .background (ColoredGlassView(centerUnitPoint: .topLeading, radius: 1500))
                 .clipShape(RoundedRectangle(cornerRadius: 25))
@@ -339,15 +393,34 @@ extension CloudInfoView {
     private var identificationSection: some View {
         VStack {
             CloudIdentificationViewRow(SFSymbol: "cloud.circle", title: "Shape", content: "Fluffy, cotton-like appearance with a clearly defined base.")
+                .padding(.top)
+            
+            Divider()
+                .frame(width: 300)
             
             CloudIdentificationViewRow(SFSymbol: "viewfinder", title: "Edges", content: "Rounded and well-defined.")
             
+            Divider()
+                .frame(width: 300)
+            
             CloudIdentificationViewRow(SFSymbol: "arrow.down.left.and.arrow.up.right", title: "Size", content: "Varies from small puffs to large, towering formations.")
+            
+            Divider()
+                .frame(width: 300)
             
             CloudIdentificationViewRow(SFSymbol: "paintpalette", title: "Color", content: "Typically white, but can have darker bases if rain is imminent.")
             
+            Divider()
+                .frame(width: 300)
+            
             CloudIdentificationViewRow(SFSymbol: "location", title: "Location", content: "Usually found at lower altitudes, often on fair weather days.")
+                .padding(.bottom)
         }
+        .background(ColoredGlassView(centerUnitPoint: .topLeading, radius: 2000))
+//        .thinBorder()
+        .clipShape(RoundedRectangle(cornerRadius: 25))
+        .padding(.horizontal)
+        .shadow(radius: 1)
     }
     
     private var historicalInformationTitle: some View {
@@ -369,7 +442,25 @@ extension CloudInfoView {
     }
     
     private var similarCloudsSection: some View {
-        EmptyView()
+        
+        ScrollView(.horizontal) {
+            LazyHStack(spacing: 0) {
+                ForEach(1...4, id: \.self) { count in
+                    SimilarCloudCardView(image: "Mammatus1", name: "Mamma Clouds", description: "Mamma clouds and cumulus clouds are similar in shape and size but mamma clouds are identifyable by their large bulbs hanging from the bottom of their cloud.")
+                        .frame(width: UIScreen.main.bounds.width - 50)
+                        .padding(.horizontal, 5)
+                        .scrollTransition { content, phase in
+                            content
+                                .opacity(phase.isIdentity ? 1 : 0.9)
+                                .scaleEffect(y: phase.isIdentity ? 1 : 0.95)
+                        }
+                }
+            }
+            .scrollTargetLayout()
+        }
+        .scrollIndicators(.hidden)
+        .scrollTargetBehavior(.viewAligned)
+        .contentMargins(20, for: .scrollContent)
     }
     
     private var lookOutForTitle: some View {

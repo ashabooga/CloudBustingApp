@@ -9,4 +9,19 @@ extension View {
             self
         }
     }
+    
+    func thinBorder() -> some View {
+        self.overlay(RoundedRectangle(cornerRadius: 25).stroke(.gray, lineWidth: 0.5))
+    }
+}
+
+extension Text {
+    
+    func paragraphText() -> some View {
+        self.font(.callout)
+            .foregroundColor(.paragraphText)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .fixedSize(horizontal: false, vertical: true)
+    }
+    
 }

@@ -13,6 +13,7 @@
 		0E167D262C31DFD200B9263C /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E167D252C31DFD200B9263C /* BlurView.swift */; };
 		0E167D282C31E00900B9263C /* CloudOfTheDayThumbnailButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E167D272C31E00900B9263C /* CloudOfTheDayThumbnailButtonView.swift */; };
 		0E167D2A2C31E06300B9263C /* CloudModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E167D292C31E06300B9263C /* CloudModel.swift */; };
+		0E219C882C4A658D00BB9E4E /* AlternateCloudInfoCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E219C872C4A658D00BB9E4E /* AlternateCloudInfoCardView.swift */; };
 		0E3264982C3D241200BF4DBE /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3264972C3D241200BF4DBE /* CameraView.swift */; };
 		0E8749A12C300D3400821646 /* CloudBustingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8749A02C300D3400821646 /* CloudBustingApp.swift */; };
 		0E8749A32C300D3400821646 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8749A22C300D3400821646 /* HomeView.swift */; };
@@ -32,6 +33,7 @@
 		0E167D252C31DFD200B9263C /* BlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
 		0E167D272C31E00900B9263C /* CloudOfTheDayThumbnailButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudOfTheDayThumbnailButtonView.swift; sourceTree = "<group>"; };
 		0E167D292C31E06300B9263C /* CloudModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudModel.swift; sourceTree = "<group>"; };
+		0E219C872C4A658D00BB9E4E /* AlternateCloudInfoCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternateCloudInfoCardView.swift; sourceTree = "<group>"; };
 		0E3264972C3D241200BF4DBE /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		0E87499D2C300D3400821646 /* CloudBusting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CloudBusting.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E8749A02C300D3400821646 /* CloudBustingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudBustingApp.swift; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 			children = (
 				0E8749A22C300D3400821646 /* HomeView.swift */,
 				0E0833612C35455300FD73AB /* CloudInfoCardView.swift */,
+				0E219C872C4A658D00BB9E4E /* AlternateCloudInfoCardView.swift */,
 				0E3264972C3D241200BF4DBE /* CameraView.swift */,
 				0E8749B12C3052FE00821646 /* ArticleThumbnailButtonView.swift */,
 				0E167D272C31E00900B9263C /* CloudOfTheDayThumbnailButtonView.swift */,
@@ -206,6 +209,7 @@
 				0E3264982C3D241200BF4DBE /* CameraView.swift in Sources */,
 				0E8749A32C300D3400821646 /* HomeView.swift in Sources */,
 				0E0833622C35455300FD73AB /* CloudInfoCardView.swift in Sources */,
+				0E219C882C4A658D00BB9E4E /* AlternateCloudInfoCardView.swift in Sources */,
 				0E167D2A2C31E06300B9263C /* CloudModel.swift in Sources */,
 				0E0833642C37E79F00FD73AB /* ExpandableTextView.swift in Sources */,
 				0ED54B042C39993A000CD8B2 /* WeatherBentoGridView.swift in Sources */,
