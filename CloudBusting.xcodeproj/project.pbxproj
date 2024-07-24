@@ -16,6 +16,7 @@
 		0E219C882C4A658D00BB9E4E /* AlternateCloudInfoCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E219C872C4A658D00BB9E4E /* AlternateCloudInfoCardView.swift */; };
 		0E3264982C3D241200BF4DBE /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3264972C3D241200BF4DBE /* CameraView.swift */; };
 		0E8520162C502A5600E161E4 /* IconsAndSymbolsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8520152C502A5600E161E4 /* IconsAndSymbolsView.swift */; };
+		0E8520182C50ED2300E161E4 /* UserLibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8520172C50ED2300E161E4 /* UserLibraryView.swift */; };
 		0E8749A12C300D3400821646 /* CloudBustingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8749A02C300D3400821646 /* CloudBustingApp.swift */; };
 		0E8749A32C300D3400821646 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8749A22C300D3400821646 /* HomeView.swift */; };
 		0E8749A52C300D3A00821646 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E8749A42C300D3A00821646 /* Assets.xcassets */; };
@@ -37,6 +38,7 @@
 		0E219C872C4A658D00BB9E4E /* AlternateCloudInfoCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternateCloudInfoCardView.swift; sourceTree = "<group>"; };
 		0E3264972C3D241200BF4DBE /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		0E8520152C502A5600E161E4 /* IconsAndSymbolsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconsAndSymbolsView.swift; sourceTree = "<group>"; };
+		0E8520172C50ED2300E161E4 /* UserLibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLibraryView.swift; sourceTree = "<group>"; };
 		0E87499D2C300D3400821646 /* CloudBusting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CloudBusting.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E8749A02C300D3400821646 /* CloudBustingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudBustingApp.swift; sourceTree = "<group>"; };
 		0E8749A22C300D3400821646 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				0E8749A22C300D3400821646 /* HomeView.swift */,
+				0E8520172C50ED2300E161E4 /* UserLibraryView.swift */,
 				0E0833612C35455300FD73AB /* CloudInfoCardView.swift */,
 				0E219C872C4A658D00BB9E4E /* AlternateCloudInfoCardView.swift */,
 				0E3264972C3D241200BF4DBE /* CameraView.swift */,
@@ -223,6 +226,7 @@
 				0E8520162C502A5600E161E4 /* IconsAndSymbolsView.swift in Sources */,
 				0E167D242C31B8C700B9263C /* ArticleModel.swift in Sources */,
 				0E8749A12C300D3400821646 /* CloudBustingApp.swift in Sources */,
+				0E8520182C50ED2300E161E4 /* UserLibraryView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

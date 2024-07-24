@@ -285,6 +285,7 @@ extension CloudInfoView {
     private var overviewTitle: some View {
         
         VStack {
+            
             HStack {
                 Text(cloud.name)
                     .font(.largeTitle)
@@ -308,7 +309,7 @@ extension CloudInfoView {
                     .padding(5)
                     .padding(.horizontal, 5)
                     .background {
-                        RoundedRectangle(cornerRadius: 5)
+                        RoundedRectangle(cornerRadius: 25)
                             .foregroundStyle(.teal)
                     }
                 
@@ -316,6 +317,13 @@ extension CloudInfoView {
                 Spacer()
             }
             .padding(.bottom)
+            
+//            HStack {
+//                
+//                Spacer()
+//                
+//                Image(systemName: "square.and.pencil")
+//            }
         }
         .padding(.horizontal, 25)
 //        .frame(maxHeight: 200)
