@@ -16,7 +16,7 @@ struct CloudInfoCardView: View {
         NavigationStack {
             ZStack(alignment: .top) {
                 
-                Color.darkColor1.ignoresSafeArea()
+                Color.black.ignoresSafeArea()
                 
                 Image("Cindy-Otter")
                     .resizable()
@@ -71,9 +71,12 @@ struct CloudInfoView: View {
     var body: some View {
             
         ZStack {
-            Color.darkColor1.ignoresSafeArea()
+            Color.black.ignoresSafeArea()
             
-            LinearGradient(gradient: Gradient(colors: [Color.lightColor1, Color.clear]), startPoint: .topLeading, endPoint: .bottomTrailing)
+            LinearGradient(stops: [
+                .init(color: .darkColor1, location: 0.05),
+                .init(color: .clear, location: 0.1)
+            ], startPoint: .topLeading, endPoint: .bottomTrailing)
                 .ignoresSafeArea()
             
             LazyVStack {
@@ -127,7 +130,7 @@ struct CloudInfoView: View {
                 
                 associatedArticlesTitle
                 
-                
+                asSeenInArtworkTitle
                 
                 
                 
@@ -177,45 +180,40 @@ struct SimilarCloudCardView: View {
     let description: String
     
     var body: some View {
-        
-        
-        ZStack {
             
-            ColoredGlassView(centerUnitPoint: .top, radius: 1500)
-                .ignoresSafeArea()
+        VStack {
+            Image(image)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(height: 200)
+                .clipped()
             
-            VStack {
-                Image(image)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(height: 200)
-                    .clipped()
+            HStack {
+                Image(systemName: "exclamationmark.triangle.fill")
                 
-                HStack {
-                    Image(systemName: "exclamationmark.triangle.fill")
-                    
-                    Text(name)
+                Text(name)
 
-                    Spacer()
-                }
-                .font(.title2)
-                .bold()
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.leading, 25)
-                .padding(.top)
-                
-                Text(description)
-                    .paragraphText()
-                    .padding(.horizontal, 25)
-                    .padding(.vertical, 10)
-                
+                Spacer()
             }
-            .foregroundStyle(.nonInteractiveText)
-            .multilineTextAlignment(.leading)
-            .padding(.bottom)
+            .font(.title2)
+            .bold()
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.leading, 25)
+            .padding(.top)
+            
+            Text(description)
+                .paragraphText()
+                .padding(.horizontal, 25)
+                .padding(.vertical, 10)
+            
         }
+        .foregroundStyle(.nonInteractiveText)
+        .multilineTextAlignment(.leading)
+        .padding(.bottom)
+        .background(.interactiveSymbol)
         .clipShape(RoundedRectangle(cornerRadius: 25))
         .shadow(radius: 10)
+        
     }
 }
 
@@ -283,45 +281,54 @@ struct lookOutForCloudCardView: View {
 extension CloudInfoView {
     
     private var overviewTitle: some View {
-        HStack {
-            Text(cloud.name)
-                .font(.largeTitle)
-                .bold()
+        
+        VStack {
+            HStack {
+                Text(cloud.name)
+                    .font(.largeTitle)
+                    .bold()
+                
+                Spacer()
+                
+                Image(systemName: "square.and.arrow.up.circle.fill")
+                    .font(.largeTitle)
+                    .foregroundStyle(.interactiveSymbol)
+                    .bold()
+                
+            }
+            .padding(.top, 40)
             
-            Text("Common")
-                .font(.title2)
-                .bold()
-                .padding(5)
-                .padding(.horizontal, 5)
-                .background {
-                    RoundedRectangle(cornerRadius: 5)
-                        .foregroundStyle(.teal)
-                }
-            
-            
-            Spacer()
-            
-            Image(systemName: "square.and.arrow.up.circle.fill")
-                .font(.largeTitle)
-                .foregroundStyle(.paragraphText)
-                .bold()
+            HStack {
+                
+                Text("Common")
+                    .font(.title3)
+                    .bold()
+                    .padding(5)
+                    .padding(.horizontal, 5)
+                    .background {
+                        RoundedRectangle(cornerRadius: 5)
+                            .foregroundStyle(.teal)
+                    }
+                
+                
+                Spacer()
+            }
+            .padding(.bottom)
         }
-        .padding(.top, 40)
         .padding(.horizontal, 25)
-        .frame(maxHeight: 100)
+//        .frame(maxHeight: 200)
     }
     
     private var imagesTitle: some View {
         HStack {
-            Text("Images 📸")
+            Text("Images")
                 .foregroundStyle(.nonInteractiveText)
-                
-            Spacer()
             
             Image(systemName: "chevron.right")
-                .padding(.trailing)
                 .font(.title2)
-                .foregroundStyle(.interactiveText)
+                .foregroundStyle(.interactiveSymbol)
+            
+            Spacer()
         }
         .font(.title)
         .bold()
@@ -351,7 +358,7 @@ extension CloudInfoView {
     }
     
     private var keyInformationTitle: some View {
-        Text("Key Information ℹ️")
+        Text("Key Information")
             .font(.title)
             .bold()
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -365,7 +372,7 @@ extension CloudInfoView {
             Text("The Cumulus cloud stays at low altitudes with potential to go higher, has a low precipitation chance, and is white to light gray in color.")
                 .paragraphText()
                 .padding()
-                .background (ColoredGlassView(centerUnitPoint: .topLeading, radius: 1500))
+                .background (Color(UIColor.opaqueSeparator))
                 .clipShape(RoundedRectangle(cornerRadius: 25))
                 .padding(.horizontal)
                 .fixedSize(horizontal: false, vertical: true)
@@ -388,7 +395,7 @@ extension CloudInfoView {
                     Spacer()
                 }
                 .frame(width: 175, height: 370)
-                .background(ColoredGlassView(centerUnitPoint: .topLeading, radius: 1500))
+                .background(.thinMaterial)
                 .clipShape(RoundedRectangle(cornerRadius: 25))
                 .padding(.trailing, 5)
                 
@@ -424,7 +431,7 @@ extension CloudInfoView {
                         
                     }
                     .frame(width: 175, height: 175)
-                    .background(ColoredGlassView(centerUnitPoint: .topLeading, radius: 700))
+                    .background(.thinMaterial)
                     .clipShape(RoundedRectangle(cornerRadius: 25))
                     .padding(.bottom, 5)
                     
@@ -456,7 +463,7 @@ extension CloudInfoView {
                         
                     }
                     .frame(width: 175, height: 175)
-                    .background(ColoredGlassView(centerUnitPoint: .topLeading, radius: 700))
+                    .background(.thinMaterial)
                     .clipShape(RoundedRectangle(cornerRadius: 25))
                     .padding(.top, 5)
                 }
@@ -469,7 +476,7 @@ extension CloudInfoView {
     }
     
     private var identificationTitle: some View {
-        Text("Identification ⛅️")
+        Text("Identification")
             .font(.title)
             .bold()
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -503,7 +510,7 @@ extension CloudInfoView {
             CloudIdentificationViewRow(SFSymbol: "location", title: "Location", content: "Usually found at lower altitudes, often on fair weather days.")
                 .padding(.bottom)
         }
-        .background(ColoredGlassView(centerUnitPoint: .topLeading, radius: 2000))
+        .background(.thinMaterial)
         .clipShape(RoundedRectangle(cornerRadius: 25))
         .padding(.horizontal)
         .padding(.bottom)
@@ -511,7 +518,7 @@ extension CloudInfoView {
     }
     
     private var historicalInformationTitle: some View {
-        Text("Historical Information 🏛️")
+        Text("Historical Information")
             .font(.title)
             .bold()
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -521,15 +528,14 @@ extension CloudInfoView {
     
     private var similarCloudsTitle: some View {
         HStack {
-            Text("Don't Confuse With 🚫")
+            Text("Don't Confuse With")
                 .foregroundStyle(.nonInteractiveText)
-                
-            Spacer()
             
             Image(systemName: "chevron.right")
-                .padding(.trailing)
                 .font(.title2)
-                .foregroundStyle(.interactiveText)
+                .foregroundStyle(.interactiveSymbol)
+            
+            Spacer()
         }
         .font(.title)
         .bold()
@@ -552,7 +558,7 @@ extension CloudInfoView {
                             .padding(.horizontal, 5)
                             .scrollTransition { content, phase in
                                 content
-                                    .opacity(phase.isIdentity ? 1 : 0.9)
+                                    .opacity(phase.isIdentity ? 1 : 0.75)
                                     .scaleEffect(y: phase.isIdentity ? 1 : 0.95)
                             }
                     }
@@ -567,15 +573,14 @@ extension CloudInfoView {
     
     private var lookOutForTitle: some View {
         HStack {
-            Text("Also Look For 👀")
+            Text("Also Look For")
                 .foregroundStyle(.nonInteractiveText)
-                
-            Spacer()
             
             Image(systemName: "chevron.right")
-                .padding(.trailing)
                 .font(.title2)
-                .foregroundStyle(.interactiveText)
+                .foregroundStyle(.interactiveSymbol)
+            
+            Spacer()
         }
         .font(.title)
         .bold()
@@ -611,7 +616,7 @@ extension CloudInfoView {
     }
     
     private var associatedArticlesTitle: some View {
-        Text("Mentioned In 📖")
+        Text("Mentioned In")
             .font(.title)
             .bold()
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -624,7 +629,16 @@ extension CloudInfoView {
     }
     
     private var formationAndDevelopmentTitle: some View {
-        Text("Cloud Formation ☁️")
+        Text("Cloud Formation")
+            .font(.title)
+            .bold()
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.leading, 25)
+            .padding(.top)
+    }
+    
+    private var asSeenInArtworkTitle: some View {
+        Text("As Seen In Artwork")
             .font(.title)
             .bold()
             .frame(maxWidth: .infinity, alignment: .leading)
