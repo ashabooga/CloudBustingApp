@@ -21,8 +21,8 @@ struct ExpandableTextView: View {
             VStack(alignment: .leading) {
                 Text(text)
                     .lineLimit(showFullText ? nil : 4)
-                    .font(.callout)
-                    .foregroundColor(.paragraphText)
+                    .foregroundStyle(.nonInteractiveText)
+                    .fontWeight(.semibold)
                     .padding()
                     .animation(showFullText ? Animation.easeInOut : .none, value: showFullText)
             }
