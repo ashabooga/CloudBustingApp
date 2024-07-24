@@ -19,7 +19,7 @@ extension Text {
     
     func paragraphText() -> some View {
         self.font(.callout)
-            .foregroundColor(.paragraphText)
+            .foregroundStyle(.nonInteractiveText)
             .frame(maxWidth: .infinity, alignment: .leading)
             .fixedSize(horizontal: false, vertical: true)
     }

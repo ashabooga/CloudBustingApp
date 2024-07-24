@@ -83,8 +83,10 @@ struct CloudInfoView: View {
                 
                 overviewTitle
                 
-                Divider()
-                    .frame(width: 350)
+                RoundedRectangle(cornerRadius: 25)
+                    .frame(width: 350, height: 2)
+                    .foregroundStyle(Color(UIColor.darkGray))
+                    .font(.title2)
                     .padding(.bottom)
                 
                 ExpandableTextView(text: cloud.aboutInfo)
@@ -372,7 +374,7 @@ extension CloudInfoView {
             Text("The Cumulus cloud stays at low altitudes with potential to go higher, has a low precipitation chance, and is white to light gray in color.")
                 .paragraphText()
                 .padding()
-                .background (Color(UIColor.opaqueSeparator))
+                .background (Color(UIColor.systemFill))
                 .clipShape(RoundedRectangle(cornerRadius: 25))
                 .padding(.horizontal)
                 .fixedSize(horizontal: false, vertical: true)
