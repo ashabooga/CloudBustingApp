@@ -21,11 +21,19 @@ struct UserLibraryView: View {
                     .ignoresSafeArea()
                 
                 
-                
-                VStack {
-                    LibraryListView
-                    
-                    
+                ScrollView {
+                    VStack(spacing: 20) {
+                        LibraryListView
+                            .padding(.bottom)
+                        
+                        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]) {
+                            ForEach(0..<8) { _ in
+                                Rectangle()
+                                    .frame(height: 100)
+                            }
+                        }
+                        .padding()
+                    }
                 }
             }
             .navigationTitle("Library")
@@ -37,7 +45,7 @@ struct UserLibraryView: View {
 extension UserLibraryView {
     
     private var LibraryListView: some View {
-        List {
+        LazyVStack {
             HStack {
                 Image(systemName: "cloud.fill")
                     .foregroundStyle(.lightColor1)
@@ -51,7 +59,8 @@ extension UserLibraryView {
                     .foregroundStyle(.interactiveSymbol)
             }
             .padding(.vertical)
-            .listRowBackground(Color.clear)
+            .padding(.leading)
+            .padding(.trailing)
             
             HStack {
                 Image(systemName: "heart.fill")
@@ -66,7 +75,8 @@ extension UserLibraryView {
                     .foregroundStyle(.interactiveSymbol)
             }
             .padding(.vertical)
-            .listRowBackground(Color.clear)
+            .padding(.leading)
+            .padding(.trailing)
             
             HStack {
                 Image(systemName: "bookmark.fill")
@@ -81,12 +91,11 @@ extension UserLibraryView {
                     .foregroundStyle(.interactiveSymbol)
             }
             .padding(.vertical)
-            .listRowBackground(Color.clear)
+            .padding(.leading)
+            .padding(.trailing)
         }
         .font(.title2)
         .fontWeight(.semibold)
-        .listStyle(.plain)
-        .scrollDisabled(true)
         .padding(.top)
     }
     
