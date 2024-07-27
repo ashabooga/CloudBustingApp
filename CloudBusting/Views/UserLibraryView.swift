@@ -15,24 +15,46 @@ struct UserLibraryView: View {
                 Color(UIColor.systemBackground).ignoresSafeArea()
                 
                 LinearGradient(stops: [
-                    .init(color: .darkColor1, location: 0.1),
-                    .init(color: .clear, location: 0.5)
-                ], startPoint: .topLeading, endPoint: .bottomTrailing)
+                    .init(color: .darkColor1, location: 0.01),
+                    .init(color: .clear, location: 0.3)
+                ], startPoint: .top, endPoint: .bottom)
                     .ignoresSafeArea()
                 
                 
                 ScrollView {
                     VStack(spacing: 20) {
                         LibraryListView
-                            .padding(.bottom)
                         
-                        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]) {
+                        Text("Recently Scanned")
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .font(.title)
+                            .bold()
+                            .padding(.horizontal)
+                        
+                        LazyVGrid(columns: [GridItem(.flexible(), spacing: 20), GridItem(.flexible(), spacing: 20)], spacing: 20) {
                             ForEach(0..<8) { _ in
-                                Rectangle()
-                                    .frame(height: 100)
+                                VStack {
+                                    Rectangle()
+                                        .aspectRatio(1, contentMode: .fit)
+                                        .overlay(
+                                            Image("Cumulus5")
+                                                .resizable()
+                                                .scaledToFill()
+                                        )
+                                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                                    
+                                    Text("Cumulus")
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                        .font(.footnote)
+                                    
+                                    Text("Jul 27")
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                        .font(.footnote)
+                                        .foregroundStyle(.interactiveSymbol)
+                                }
                             }
                         }
-                        .padding()
+                        .padding(.horizontal)
                     }
                 }
             }
@@ -45,7 +67,7 @@ struct UserLibraryView: View {
 extension UserLibraryView {
     
     private var LibraryListView: some View {
-        LazyVStack {
+        VStack {
             HStack {
                 Image(systemName: "cloud.fill")
                     .foregroundStyle(.lightColor1)
@@ -58,9 +80,12 @@ extension UserLibraryView {
                 Image(systemName: "chevron.right")
                     .foregroundStyle(.interactiveSymbol)
             }
-            .padding(.vertical)
-            .padding(.leading)
+            .padding(.vertical, 5)
+            .padding(.leading, 15)
             .padding(.trailing)
+            
+            Divider()
+                .padding(.leading, 50)
             
             HStack {
                 Image(systemName: "heart.fill")
@@ -74,9 +99,13 @@ extension UserLibraryView {
                 Image(systemName: "chevron.right")
                     .foregroundStyle(.interactiveSymbol)
             }
-            .padding(.vertical)
-            .padding(.leading)
+            .padding(.vertical, 5)
+            .padding(.leading, 16)
             .padding(.trailing)
+            
+            Divider()
+                .padding(.leading, 50)
+                .foregroundStyle(.interactiveSymbol)
             
             HStack {
                 Image(systemName: "bookmark.fill")
@@ -90,13 +119,15 @@ extension UserLibraryView {
                 Image(systemName: "chevron.right")
                     .foregroundStyle(.interactiveSymbol)
             }
-            .padding(.vertical)
-            .padding(.leading)
+            .padding(.vertical, 5)
+            .padding(.leading, 18)
             .padding(.trailing)
+            
+            Divider()
+                .padding(.leading, 50)
         }
         .font(.title2)
         .fontWeight(.semibold)
-        .padding(.top)
     }
     
 }
