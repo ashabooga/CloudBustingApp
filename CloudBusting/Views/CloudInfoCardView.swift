@@ -16,7 +16,7 @@ struct CloudInfoCardView: View {
         NavigationStack {
             ZStack(alignment: .top) {
                 
-                Color.black.ignoresSafeArea()
+                Color(UIColor.systemBackground).ignoresSafeArea()
                 
                 Image("Cindy-Otter")
                     .resizable()

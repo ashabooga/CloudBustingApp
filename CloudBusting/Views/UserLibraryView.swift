@@ -15,7 +15,7 @@ struct UserLibraryView: View {
                 Color(UIColor.systemBackground).ignoresSafeArea()
                 
                 LinearGradient(stops: [
-                    .init(color: .darkColor1, location: 0.01),
+                    .init(color: .background, location: 0.01),
                     .init(color: .clear, location: 0.3)
                 ], startPoint: .top, endPoint: .bottom)
                     .ignoresSafeArea()
@@ -70,7 +70,7 @@ extension UserLibraryView {
         VStack {
             HStack {
                 Image(systemName: "cloud.fill")
-                    .foregroundStyle(.lightColor1)
+                    .foregroundStyle(.highlight)
                 
                 Text("Your Clouds")
                     .padding(3)
@@ -89,7 +89,7 @@ extension UserLibraryView {
             
             HStack {
                 Image(systemName: "heart.fill")
-                    .foregroundStyle(.lightColor1)
+                    .foregroundStyle(.highlight)
                 
                 Text("Wishlists")
                     .padding(3)
@@ -109,7 +109,7 @@ extension UserLibraryView {
             
             HStack {
                 Image(systemName: "bookmark.fill")
-                    .foregroundStyle(.lightColor1)
+                    .foregroundStyle(.highlight)
                 
                 Text("Saved Articles")
                     .padding(3)
