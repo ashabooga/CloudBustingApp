@@ -23,6 +23,22 @@ struct ColoredGlassView: View {
     }
 }
 
+struct BlurredGradientBackgroundView: View {
+    var body: some View {
+        ZStack {
+            Color(UIColor.systemBackground).ignoresSafeArea()
+            
+            LinearGradient(stops: [
+                .init(color: .darkColor1, location: 0.1),
+                .init(color: .clear, location: 0.4)
+            ], startPoint: .top, endPoint: .bottom)
+            .ignoresSafeArea()
+        }
+        .blur(radius: 5)
+        .ignoresSafeArea()
+    }
+}
+
 #Preview {
     ColoredGlassView(centerUnitPoint: .topLeading, radius: 800)
 }

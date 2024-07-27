@@ -32,7 +32,8 @@ struct ExpandableTextView: View {
         .background {
 //            RoundedRectangle(cornerRadius: 25)
 //                .foregroundStyle(.darkColor1)
-            ColoredGlassView(centerUnitPoint: .topLeading, radius: 4000)
+//            ColoredGlassView(centerUnitPoint: .topLeading, radius: 4000)
+            Color(UIColor.systemBackground)
         }
         .if(!showFullText) { view in
             view.glur(offset: 0.45, interpolation: 0.6)

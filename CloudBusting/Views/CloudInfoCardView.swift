@@ -39,7 +39,7 @@ struct CloudInfoCardView: View {
                             )
                             .padding(.bottom, 25)
                     }
-                    .ignoresSafeArea(edges: .bottom)
+                    .ignoresSafeArea(edges: [.bottom])
                     .frame(maxHeight: .infinity)
     //                .onScrollGeometryChange(for: CGFloat.self, of: { geo in
     //                    return geo.contentOffset.y + geo.contentInsets.top
@@ -71,13 +71,13 @@ struct CloudInfoView: View {
     var body: some View {
             
         ZStack {
-            Color.black.ignoresSafeArea()
+            Color.contentBackground.ignoresSafeArea()
             
             LinearGradient(stops: [
-                .init(color: .darkColor1, location: 0.05),
-                .init(color: .clear, location: 0.1)
-            ], startPoint: .topLeading, endPoint: .bottomTrailing)
-                .ignoresSafeArea()
+                .init(color: .darkColor1, location: 0),
+                .init(color: .clear, location: 0.05)
+            ], startPoint: .top, endPoint: .bottom)
+            .ignoresSafeArea()
             
             LazyVStack {
                 
@@ -209,10 +209,9 @@ struct SimilarCloudCardView: View {
                 .padding(.vertical, 10)
             
         }
-        .foregroundStyle(.nonInteractiveText)
         .multilineTextAlignment(.leading)
         .padding(.bottom)
-        .background(.interactiveSymbol)
+        .background(Color(UIColor.secondarySystemBackground))
         .clipShape(RoundedRectangle(cornerRadius: 25))
         .shadow(radius: 10)
         

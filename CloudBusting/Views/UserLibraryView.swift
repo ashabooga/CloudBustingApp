@@ -12,13 +12,7 @@ struct UserLibraryView: View {
         NavigationStack {
             
             ZStack {
-                Color(UIColor.systemBackground).ignoresSafeArea()
-                
-                LinearGradient(stops: [
-                    .init(color: .background, location: 0.01),
-                    .init(color: .clear, location: 0.3)
-                ], startPoint: .top, endPoint: .bottom)
-                    .ignoresSafeArea()
+                BlurredGradientBackgroundView()
                 
                 
                 ScrollView {
@@ -59,6 +53,7 @@ struct UserLibraryView: View {
                 }
             }
             .navigationTitle("Library")
+            .toolbarBackground(.ultraThinMaterial, for: .navigationBar)
             
         }
     }
@@ -71,6 +66,8 @@ extension UserLibraryView {
             HStack {
                 Image(systemName: "cloud.fill")
                     .foregroundStyle(.highlight)
+                
+                
                 
                 Text("Your Clouds")
                     .padding(3)
