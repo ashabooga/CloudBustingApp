@@ -14,41 +14,23 @@ struct CloudInfoCardView: View {
     
     var body: some View {
         NavigationStack {
-            ZStack(alignment: .top) {
+            ZStack() {
                 
-                Color(UIColor.systemBackground).ignoresSafeArea()
+                Color.contentBackground.ignoresSafeArea()
                 
-                Image("Cindy-Otter")
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(height: 300 + max(0, -offset))
-                    .clipped()
-                    .transformEffect(.init(translationX: 0, y: -(max(0, offset))))
-                    .ignoresSafeArea()
-                
-                if #available(iOS 18.0, *) {
-                    ScrollView {
-                        
-                        Rectangle()
-                            .fill(Color.clear)
-                            .frame(height: 200)
-                        
-                        CloudInfoView(cloud: cloud)
-                            .clipShape(
-                                .rect(topLeadingRadius: 25, topTrailingRadius: 25)
-                            )
-                            .padding(.bottom, 25)
-                    }
-                    .ignoresSafeArea(edges: [.bottom])
-                    .frame(maxHeight: .infinity)
-    //                .onScrollGeometryChange(for: CGFloat.self, of: { geo in
-    //                    return geo.contentOffset.y + geo.contentInsets.top
-    //                }, action: { new, old in
-    //                    offset = new
-    //                })
-                } else {
+                ScrollView {
                     
+                    StretchyHeaderView(image: Image("Cindy-Otter"), initialHeaderHeight: 350)
+                    
+                    CloudInfoView(cloud: cloud)
+                        .clipShape(
+                            .rect(topLeadingRadius: 25, topTrailingRadius: 25)
+                        )
+                        .padding(.bottom, 25)
+                        .padding(.top, -35)
                 }
+                .ignoresSafeArea()
+                .frame(maxHeight: .infinity)
             }
         }
     }
@@ -74,7 +56,7 @@ struct CloudInfoView: View {
             Color.contentBackground.ignoresSafeArea()
             
             LinearGradient(stops: [
-                .init(color: .darkColor1, location: 0),
+                .init(color: .background, location: 0),
                 .init(color: .clear, location: 0.05)
             ], startPoint: .top, endPoint: .bottom)
             .ignoresSafeArea()
@@ -161,7 +143,7 @@ struct CloudIdentificationViewRow: View {
                     Spacer()
                 }
                 .font(.title3)
-                .foregroundStyle(.black)
+                .foregroundStyle(.nonInteractiveText)
                 .opacity(0.5)
             }
             .padding()
@@ -199,6 +181,7 @@ struct SimilarCloudCardView: View {
             }
             .font(.title2)
             .bold()
+            .foregroundStyle(.highlight)
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.leading, 25)
             .padding(.top)
@@ -211,7 +194,7 @@ struct SimilarCloudCardView: View {
         }
         .multilineTextAlignment(.leading)
         .padding(.bottom)
-        .background(Color(UIColor.secondarySystemBackground))
+        .background(Color.fill)
         .clipShape(RoundedRectangle(cornerRadius: 25))
         .shadow(radius: 10)
         
@@ -381,7 +364,7 @@ extension CloudInfoView {
             Text("The Cumulus cloud stays at low altitudes with potential to go higher, has a low precipitation chance, and is white to light gray in color.")
                 .paragraphText()
                 .padding()
-                .background (Color(UIColor.systemFill))
+                .background (Color.fill)
                 .clipShape(RoundedRectangle(cornerRadius: 25))
                 .padding(.horizontal)
                 .fixedSize(horizontal: false, vertical: true)
@@ -404,7 +387,7 @@ extension CloudInfoView {
                     Spacer()
                 }
                 .frame(width: 175, height: 370)
-                .background(.thinMaterial)
+                .background(Color.fill)
                 .clipShape(RoundedRectangle(cornerRadius: 25))
                 .padding(.trailing, 5)
                 
@@ -440,7 +423,7 @@ extension CloudInfoView {
                         
                     }
                     .frame(width: 175, height: 175)
-                    .background(.thinMaterial)
+                    .background(Color.fill)
                     .clipShape(RoundedRectangle(cornerRadius: 25))
                     .padding(.bottom, 5)
                     
@@ -472,7 +455,7 @@ extension CloudInfoView {
                         
                     }
                     .frame(width: 175, height: 175)
-                    .background(.thinMaterial)
+                    .background(Color.fill)
                     .clipShape(RoundedRectangle(cornerRadius: 25))
                     .padding(.top, 5)
                 }
@@ -519,7 +502,7 @@ extension CloudInfoView {
             CloudIdentificationViewRow(SFSymbol: "location", title: "Location", content: "Usually found at lower altitudes, often on fair weather days.")
                 .padding(.bottom)
         }
-        .background(.thinMaterial)
+        .background(ColoredGlassView(centerUnitPoint: .top, radius: 2000))
         .clipShape(RoundedRectangle(cornerRadius: 25))
         .padding(.horizontal)
         .padding(.bottom)

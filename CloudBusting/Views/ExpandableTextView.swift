@@ -33,10 +33,10 @@ struct ExpandableTextView: View {
 //            RoundedRectangle(cornerRadius: 25)
 //                .foregroundStyle(.darkColor1)
 //            ColoredGlassView(centerUnitPoint: .topLeading, radius: 4000)
-            Color(UIColor.systemBackground)
+            Color.fill
         }
         .if(!showFullText) { view in
-            view.glur(offset: 0.45, interpolation: 0.6)
+            view.glur(offset: 0.4, interpolation: 0.3)
         }
         .clipShape(RoundedRectangle(cornerRadius: 25))
         .overlay {
@@ -45,10 +45,10 @@ struct ExpandableTextView: View {
                     showFullText.toggle()
                 }
             }, label: {
-                Text(showFullText ? "Less" : "Read more..")
+                Text(showFullText ? "LESS" : "MORE")
                     .font(.callout)
                     .foregroundStyle(.interactiveText)
-                    .fontWeight(.bold)
+                    .fontWeight(.heavy)
                     .padding(.vertical, 4)
             })
             .accentColor(.blue)
