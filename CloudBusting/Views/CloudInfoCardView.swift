@@ -10,7 +10,6 @@ import SwiftUI
 struct CloudInfoCardView: View {
     
     let cloud: CloudModel
-    @State private var offset: CGFloat = 0
     
     var body: some View {
         NavigationStack {
@@ -36,11 +35,29 @@ struct CloudInfoCardView: View {
     }
 }
 
-struct TestView: View {
+struct ScannedCloudInfoCardView: View {
+    
+    let scanAttempt: ScanAttemptModel
+    
     var body: some View {
-        LazyVStack(alignment: .leading) {
-            ForEach(0..<100, id: \.self) { item in
-                Text("Item at \(item)")
+        NavigationStack {
+            ZStack() {
+                
+                Color.contentBackground.ignoresSafeArea()
+                
+                ScrollView {
+                    
+                    StretchyHeaderView(image: Image(scanAttempt.imageName), initialHeaderHeight: 350)
+                    
+                    CloudInfoView(cloud: scanAttempt.cloudIdentified)
+                        .clipShape(
+                            .rect(topLeadingRadius: 25, topTrailingRadius: 25)
+                        )
+                        .padding(.bottom, 25)
+                        .padding(.top, -35)
+                }
+                .ignoresSafeArea()
+                .frame(maxHeight: .infinity)
             }
         }
     }
@@ -647,5 +664,5 @@ extension CloudInfoView {
 
 
 #Preview {
-    CloudInfoCardView(cloud: CloudModel.Cumulus)
+    ScannedCloudInfoCardView(scanAttempt: UserModel.exampleUser.scanAttempts[0])
 }

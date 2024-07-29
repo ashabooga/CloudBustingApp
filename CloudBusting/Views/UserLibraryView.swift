@@ -30,7 +30,12 @@ struct UserLibraryView: View {
                         
                         LazyVGrid(columns: [GridItem(.flexible(), spacing: 20), GridItem(.flexible(), spacing: 20)], spacing: 20) {
                             ForEach(user.scanAttempts, id: \.id) { scanAttempt in
-                                RecentlyScannedIconView(scanAttempt: scanAttempt)
+                                
+                                NavigationLink {
+                                    ScannedCloudInfoCardView(scanAttempt: scanAttempt)
+                                } label: {
+                                    RecentlyScannedIconView(scanAttempt: scanAttempt)
+                                }
                             }
                         }
                         .padding(.horizontal)
@@ -62,6 +67,7 @@ struct RecentlyScannedIconView: View {
             Text(scanAttempt.cloudIdentified.name)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .font(.footnote)
+                .foregroundStyle(Color.nonInteractiveText)
             
             Text(scanAttempt.dateTime.description)
                 .frame(maxWidth: .infinity, alignment: .leading)
