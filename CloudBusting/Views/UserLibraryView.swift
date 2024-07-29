@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct UserLibraryView: View {
+    
+    let user: UserModel
+    
     var body: some View {
         NavigationStack {
             
@@ -26,26 +29,8 @@ struct UserLibraryView: View {
                             .padding(.horizontal)
                         
                         LazyVGrid(columns: [GridItem(.flexible(), spacing: 20), GridItem(.flexible(), spacing: 20)], spacing: 20) {
-                            ForEach(0..<8) { _ in
-                                VStack {
-                                    Rectangle()
-                                        .aspectRatio(1, contentMode: .fit)
-                                        .overlay(
-                                            Image("Cumulus5")
-                                                .resizable()
-                                                .scaledToFill()
-                                        )
-                                        .clipShape(RoundedRectangle(cornerRadius: 10))
-                                    
-                                    Text("Cumulus")
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                        .font(.footnote)
-                                    
-                                    Text("Jul 27")
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                        .font(.footnote)
-                                        .foregroundStyle(.interactiveSymbol)
-                                }
+                            ForEach(user.scanAttempts, id: \.id) { scanAttempt in
+                                RecentlyScannedIconView(scanAttempt: scanAttempt)
                             }
                         }
                         .padding(.horizontal)
@@ -55,6 +40,33 @@ struct UserLibraryView: View {
             .navigationTitle("Library")
             .toolbarBackground(.ultraThinMaterial, for: .navigationBar)
             
+        }
+    }
+}
+
+struct RecentlyScannedIconView: View {
+    
+    let scanAttempt: ScanAttemptModel
+    
+    var body: some View {
+        VStack {
+            Rectangle()
+                .aspectRatio(1, contentMode: .fit)
+                .overlay(
+                    Image(scanAttempt.imageName)
+                        .resizable()
+                        .scaledToFill()
+                )
+                .clipShape(RoundedRectangle(cornerRadius: 10))
+            
+            Text(scanAttempt.cloudIdentified.name)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .font(.footnote)
+            
+            Text(scanAttempt.dateTime.description)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .font(.footnote)
+                .foregroundStyle(.interactiveSymbol)
         }
     }
 }
@@ -130,5 +142,5 @@ extension UserLibraryView {
 }
 
 #Preview {
-    UserLibraryView()
+    UserLibraryView(user: UserModel.exampleUser)
 }
