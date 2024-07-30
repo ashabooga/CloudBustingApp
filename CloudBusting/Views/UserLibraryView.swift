@@ -77,67 +77,98 @@ struct RecentlyScannedIconView: View {
     }
 }
 
+struct YourCloudsListView: View {
+    
+    let user: UserModel
+    
+    var body: some View {
+        
+        EmptyView()
+        
+    }
+}
+
 extension UserLibraryView {
     
     private var LibraryListView: some View {
         VStack {
-            HStack {
-                Image(systemName: "cloud.fill")
-                    .foregroundStyle(.highlight)
-                
-                
-                
-                Text("Your Clouds")
-                    .padding(3)
-                
-                Spacer()
-                
-                Image(systemName: "chevron.right")
-                    .foregroundStyle(.interactiveSymbol)
+            
+            NavigationLink {
+                EmptyView()
+            } label: {
+                HStack {
+                    Image(systemName: "cloud.fill")
+                        .foregroundStyle(.highlight)
+                    
+                    
+                    
+                    Text("Your Clouds")
+                        .padding(3)
+                        .foregroundStyle(.interactiveText)
+                    
+                    Spacer()
+                    
+                    Image(systemName: "chevron.right")
+                        .foregroundStyle(.interactiveSymbol)
+                }
+                .padding(.vertical, 5)
+                .padding(.leading, 15)
+                .padding(.trailing)
             }
-            .padding(.vertical, 5)
-            .padding(.leading, 15)
-            .padding(.trailing)
+            
             
             Divider()
                 .padding(.leading, 50)
             
-            HStack {
-                Image(systemName: "heart.fill")
-                    .foregroundStyle(.highlight)
-                
-                Text("Wishlists")
-                    .padding(3)
-                
-                Spacer()
-                
-                Image(systemName: "chevron.right")
-                    .foregroundStyle(.interactiveSymbol)
-            }
-            .padding(.vertical, 5)
-            .padding(.leading, 16)
-            .padding(.trailing)
             
+            NavigationLink {
+                EmptyView()
+            } label: {
+                HStack {
+                    Image(systemName: "heart.fill")
+                        .foregroundStyle(.highlight)
+                        .foregroundStyle(.interactiveText)
+                    
+                    Text("Wishlists")
+                        .padding(3)
+                        .foregroundStyle(.interactiveText)
+                    
+                    Spacer()
+                    
+                    Image(systemName: "chevron.right")
+                        .foregroundStyle(.interactiveSymbol)
+                        
+                }
+                .padding(.vertical, 5)
+                .padding(.leading, 16)
+                .padding(.trailing)
+            }
+
             Divider()
                 .padding(.leading, 50)
                 .foregroundStyle(.interactiveSymbol)
             
-            HStack {
-                Image(systemName: "bookmark.fill")
-                    .foregroundStyle(.highlight)
-                
-                Text("Saved Articles")
-                    .padding(3)
-                
-                Spacer()
-                
-                Image(systemName: "chevron.right")
-                    .foregroundStyle(.interactiveSymbol)
+            NavigationLink {
+                EmptyView()
+            } label: {
+                HStack {
+                    Image(systemName: "bookmark.fill")
+                        .foregroundStyle(.highlight)
+                    
+                    Text("Saved Articles")
+                        .padding(3)
+                        .foregroundStyle(.interactiveText)
+                    
+                    Spacer()
+                    
+                    Image(systemName: "chevron.right")
+                        .foregroundStyle(.interactiveSymbol)
+                }
+                .padding(.vertical, 5)
+                .padding(.leading, 18)
+                .padding(.trailing)
             }
-            .padding(.vertical, 5)
-            .padding(.leading, 18)
-            .padding(.trailing)
-            
+
             Divider()
                 .padding(.leading, 50)
         }
