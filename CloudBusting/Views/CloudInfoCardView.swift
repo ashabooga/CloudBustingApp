@@ -125,13 +125,13 @@ struct CloudInfoView: View {
                 
                 lookOutForSection
                 
-                formationAndDevelopmentTitle
-                
-                historicalInformationTitle
-                
-                associatedArticlesTitle
-                
-                asSeenInArtworkTitle
+//                formationAndDevelopmentTitle
+//                
+//                historicalInformationTitle
+//                
+//                associatedArticlesTitle
+//                
+//                asSeenInArtworkTitle
                 
                 
                 
@@ -389,19 +389,27 @@ extension CloudInfoView {
             HStack {
                 VStack {
                     HStack {
-                        Image(systemName: "barometer")
+                        Image(systemName: "ruler")
+                            .rotationEffect(.degrees(-90))
                         
                         Text("Altitude")
                             .font(.headline)
                             .bold()
                         
                         Spacer()
+
                     }
                     .foregroundStyle(.black)
                     .opacity(0.5)
-                    .padding()
+                    .padding(.horizontal)
+                    .padding(.top)
                     
-                    Spacer()
+                    
+                    AltitudeChartView(cloud: cloud)
+                    
+                    Text("300 - 1,500 Meters")
+                        .padding(.bottom)
+                    
                 }
                 .frame(width: 175, height: 370)
                 .background(Color.fill)
