@@ -15,7 +15,7 @@ struct CloudInfoCardView: View {
         NavigationStack {
             ZStack() {
                 
-                Color.contentBackground.ignoresSafeArea()
+                Color.testLight.ignoresSafeArea()
                 
                 ScrollView {
                     
@@ -43,7 +43,7 @@ struct ScannedCloudInfoCardView: View {
         NavigationStack {
             ZStack() {
                 
-                Color.contentBackground.ignoresSafeArea()
+                Color.testLight.ignoresSafeArea()
                 
                 ScrollView {
                     
@@ -70,11 +70,11 @@ struct CloudInfoView: View {
     var body: some View {
             
         ZStack {
-            Color.contentBackground.ignoresSafeArea()
+            Color.testLight.ignoresSafeArea()
             
             LinearGradient(stops: [
-                .init(color: .background, location: 0),
-                .init(color: .clear, location: 0.05)
+                .init(color: .testDark, location: 0),
+                .init(color: .clear, location: 0.1)
             ], startPoint: .top, endPoint: .bottom)
             .ignoresSafeArea()
             
@@ -198,7 +198,7 @@ struct SimilarCloudCardView: View {
             }
             .font(.title2)
             .bold()
-            .foregroundStyle(.highlight)
+            .foregroundStyle(.testAccent)
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.leading, 25)
             .padding(.top)
@@ -294,7 +294,7 @@ extension CloudInfoView {
                 
                 Image(systemName: "square.and.arrow.up.circle.fill")
                     .font(.largeTitle)
-                    .foregroundStyle(.interactiveSymbol)
+                    .foregroundStyle(.testAccent)
                     .bold()
                 
             }
@@ -331,7 +331,7 @@ extension CloudInfoView {
     private var imagesTitle: some View {
         HStack {
             Text("Images")
-                .foregroundStyle(.nonInteractiveText)
+                .foregroundStyle(.interactiveText)
             
             Image(systemName: "chevron.right")
                 .font(.title2)
@@ -538,7 +538,7 @@ extension CloudInfoView {
     private var similarCloudsTitle: some View {
         HStack {
             Text("Don't Confuse With")
-                .foregroundStyle(.nonInteractiveText)
+                .foregroundStyle(.interactiveText)
             
             Image(systemName: "chevron.right")
                 .font(.title2)
@@ -562,7 +562,7 @@ extension CloudInfoView {
                     NavigationLink {
                         EmptyView()
                     } label: {
-                        SimilarCloudCardView(image: "Mammatus1", name: "Mamma Clouds", description: "Mamma clouds and cumulus clouds are similar in shape and size but mamma clouds are identifyable by their large bulbs hanging from the bottom of their cloud.")
+                        SimilarCloudCardView(image: "Mammatus1", name: "Mamma Clouds", description: "Similar in shape and size but but have large bulbs hanging from the bottom.")
                             .frame(width: UIScreen.main.bounds.width - 50)
                             .padding(.horizontal, 5)
                             .scrollTransition { content, phase in
@@ -583,7 +583,7 @@ extension CloudInfoView {
     private var lookOutForTitle: some View {
         HStack {
             Text("Also Look For")
-                .foregroundStyle(.nonInteractiveText)
+                .foregroundStyle(.interactiveText)
             
             Image(systemName: "chevron.right")
                 .font(.title2)
