@@ -389,7 +389,7 @@ extension CloudInfoView {
             HStack {
                 VStack {
                     HStack {
-                        Image(systemName: "ruler")
+                        Image(systemName: "ruler.fill")
                             .rotationEffect(.degrees(-90))
                         
                         Text("Altitude")
@@ -408,12 +408,23 @@ extension CloudInfoView {
                         
                     AltitudeChartView(cloud: cloud)
                         .padding(.top)
+                        .padding(.horizontal)
+                        .padding(.bottom, 10)
                     
-                    Text("1,600 - 15,000m")
+                    Text("300 - 1900m")
                         .foregroundStyle(.testText)
                         .font(.headline)
                         .fontWeight(.bold)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.horizontal)
+                    
+                    Text("Low")
+                        .foregroundStyle(.testText)
+                        .font(.subheadline)
+                        .fontWeight(.semibold)
                         .padding(.bottom, 20)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.horizontal)
                     
 
                 }
@@ -427,7 +438,7 @@ extension CloudInfoView {
                 VStack {
                     VStack {
                         HStack {
-                            Image(systemName: "drop")
+                            Image(systemName: "umbrella.fill")
                             
                             Text("Precipitation")
                                 .font(.headline)
@@ -453,8 +464,9 @@ extension CloudInfoView {
                                 .foregroundStyle(.testText)
                         }
                         .tint(.testText)
+                        .opacity(0.7)
                         .gaugeStyle(.accessoryCircular)
-                        .scaleEffect(1.6)
+                        .scaleEffect(1.55)
                         .padding(.bottom, 5)
                         
                         
@@ -475,9 +487,12 @@ extension CloudInfoView {
                     
                     VStack {
                         HStack {
-                            Image(systemName: "smoke")
                             
-                            Text("Color")
+                            Spacer()
+                            
+                            Image(systemName: "drop.fill")
+                            
+                            Text("Water Content")
                                 .font(.headline)
                                 .bold()
                             
@@ -485,19 +500,27 @@ extension CloudInfoView {
                         }
                         .foregroundStyle(.black)
                         .opacity(0.5)
-                        .padding()
+                        .padding(.vertical)
+//                        .border(.black)
+                        
+                        Text("0.3 g/m\u{00B3}")
+                            .font(.largeTitle)
+                            .fontWeight(.medium)
+                            .frame(maxWidth: .infinity, alignment: .topLeading)
+                            .padding(.horizontal)
+                            .foregroundStyle(.testText)
+                            .padding(.top, -5)
                         
                         Spacer()
                         
-                        Image(systemName: "cloud.fill")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 100)
-                            .foregroundStyle(.linearGradient(colors: [.white, .gray], startPoint: .leading, endPoint: .trailing))
-                            .shadow(radius: 10)
-                            .padding(.bottom, 25)
+                        Text("Low - Medium")
+                            .foregroundStyle(.testText)
+                            .font(.headline)
+                            .fontWeight(.bold)
+                            .padding(.bottom, 20)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.horizontal)
                         
-                        Spacer()
                         
                     }
                     .frame(width: 175, height: 175)
