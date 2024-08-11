@@ -16,8 +16,8 @@ struct AltitudeChartView: View {
         Chart {
             BarMark(
                 x: .value("Altitude", ""),
-                yStart: .value("Minimum Altitude", 300),
-                yEnd: .value("Maximum Altitude", 1500),
+                yStart: .value("Minimum Altitude", 1600),
+                yEnd: .value("Maximum Altitude", 15000),
                 width: 75
             )
             .foregroundStyle(.testText)

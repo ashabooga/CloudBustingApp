@@ -407,14 +407,13 @@ extension CloudInfoView {
                     
                         
                     AltitudeChartView(cloud: cloud)
-//                        .padding(.horizontal)
                         .padding(.top)
                     
-                    Text("300 - 1,500m")
-                        .fontWeight(.heavy)
+                    Text("1,600 - 15,000m")
                         .foregroundStyle(.testText)
                         .font(.headline)
-                        .padding(.bottom, 25)
+                        .fontWeight(.bold)
+                        .padding(.bottom, 20)
                     
 
                 }
@@ -439,18 +438,33 @@ extension CloudInfoView {
                         .foregroundStyle(.black)
                         .opacity(0.5)
                         .padding()
+                        .frame(maxHeight: .infinity, alignment: .top)
                         
                         Spacer()
                         
                         Gauge(value: 10, in: 0...100) {
-                            Image(systemName: "umbrella.fill")
+                            
+                   
                         } currentValueLabel: {
-                            Text("Unlikely")
+                            Image(systemName: "cloud.sun.fill")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 25)
+                                .foregroundStyle(.testText)
                         }
+                        .tint(.testText)
                         .gaugeStyle(.accessoryCircular)
-                        .padding(.bottom)
+                        .scaleEffect(1.6)
+                        .padding(.bottom, 5)
+                        
                         
                         Spacer()
+                        
+                        Text("Unlikely")
+                            .foregroundStyle(.testText)
+                            .font(.headline)
+                            .fontWeight(.bold)
+                            .padding(.bottom, 15)
 
                         
                     }
