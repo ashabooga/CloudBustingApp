@@ -405,11 +405,18 @@ extension CloudInfoView {
                     .padding(.top)
                     
                     
+                        
                     AltitudeChartView(cloud: cloud)
+//                        .padding(.horizontal)
+                        .padding(.top)
                     
-                    Text("300 - 1,500 Meters")
-                        .padding(.bottom)
+                    Text("300 - 1,500m")
+                        .fontWeight(.heavy)
+                        .foregroundStyle(.testText)
+                        .font(.headline)
+                        .padding(.bottom, 25)
                     
+
                 }
                 .frame(width: 175, height: 370)
                 .background(Color.fill)
