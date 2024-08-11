@@ -302,6 +302,16 @@ extension CloudInfoView {
             
             HStack {
                 
+                Text("Cm")
+                    .font(.title3)
+                    .bold()
+                    .padding(5)
+                    .padding(.horizontal, 5)
+                    .background {
+                        RoundedRectangle(cornerRadius: 25)
+                            .foregroundStyle(.orange)
+                    }
+                
                 Text("Common")
                     .font(.title3)
                     .bold()
@@ -313,9 +323,30 @@ extension CloudInfoView {
                     }
                 
                 
+                HStack {
+                    
+                    Image(systemName: "umbrella.fill")
+                        .font(.headline)
+                    
+                    Text("Unlikely")
+                    
+                }
+                .font(.title3)
+                .bold()
+                .padding(5)
+                .padding(.horizontal, 5)
+                .background {
+                    RoundedRectangle(cornerRadius: 25)
+                        .foregroundStyle(.blue)
+                }
+                
+                    
+                
+                
                 Spacer()
             }
             .padding(.bottom)
+            .foregroundStyle(.testText)
             
 //            HStack {
 //                
@@ -466,8 +497,8 @@ extension CloudInfoView {
                         .tint(.testText)
                         .opacity(0.7)
                         .gaugeStyle(.accessoryCircular)
-                        .scaleEffect(1.55)
-                        .padding(.bottom, 5)
+                        .scaleEffect(1.3)
+                        .padding(.vertical, 5)
                         
                         
                         Spacer()
@@ -476,7 +507,7 @@ extension CloudInfoView {
                             .foregroundStyle(.testText)
                             .font(.headline)
                             .fontWeight(.bold)
-                            .padding(.bottom, 15)
+                            .padding(.bottom, 20)
 
                         
                     }
