@@ -378,7 +378,7 @@ extension CloudInfoView {
     private var keyInformationSection: some View {
         VStack {
             
-            Text("The Cumulus cloud stays at low altitudes with potential to go higher, has a low precipitation chance, and is white to light gray in color.")
+            Text("The Cumulus cloud stays at low altitudes with potential to go higher, has a low precipitation chance, and has a low to medium Liquid Water Content (LWC).")
                 .paragraphText()
                 .padding()
                 .background (Color.fill)
@@ -389,7 +389,7 @@ extension CloudInfoView {
             HStack {
                 VStack {
                     HStack {
-                        Image(systemName: "ruler.fill")
+                        Image(systemName: "ruler")
                             .rotationEffect(.degrees(-90))
                         
                         Text("Altitude")
@@ -513,10 +513,17 @@ extension CloudInfoView {
                         
                         Spacer()
                         
-                        Text("Low - Medium")
+                        Text("Liquid")
                             .foregroundStyle(.testText)
                             .font(.headline)
                             .fontWeight(.bold)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.horizontal)
+                        
+                        Text("Low - Medium")
+                            .foregroundStyle(.testText)
+                            .font(.subheadline)
+                            .fontWeight(.semibold)
                             .padding(.bottom, 20)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.horizontal)
