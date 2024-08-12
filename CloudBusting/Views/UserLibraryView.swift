@@ -109,28 +109,27 @@ struct YourCloudsListView: View {
         
         NavigationStack {
             
-            ZStack {
-                
-                Color.testLight.ignoresSafeArea()
+            List {
+                ForEach(user.collection, id: \.id) { scanAttempt in
+                    NavigationLink {
+                        ScannedCloudInfoCardView(scanAttempt: scanAttempt)
+                    } label: {
+                        YourCloudsListRowView(cloud: scanAttempt)
+                    }
+                }
+                .listRowBackground(Color.clear)
+            }
+            .background{
+                Color.testDark.ignoresSafeArea()
                 
                 LinearGradient(stops: [
-                    .init(color: .testDark, location: 0),
+                    .init(color: .testLight, location: 0),
                     .init(color: .clear, location: 0.4)
                 ], startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea()
-                
-                ScrollView {
-                    VStack(spacing: 25) {
-                        ForEach(user.collection, id: \.id) { scanAttempt in
-                            YourCloudsListRowView(cloud: scanAttempt)
-                        }
-                    }
-                    .frame(maxWidth: .infinity)
-                    .padding(.top)
-                    
-                }
-                .navigationTitle("Your Clouds")
             }
+            .listStyle(.plain)
+            .navigationTitle("Your Clouds")
             
         }
         
@@ -153,16 +152,10 @@ struct YourCloudsListRowView: View {
                 Text(cloud.cloudIdentified.name)
                     .font(.title3)
                     .fontWeight(.semibold)
-                
-                
             }
             
             Spacer()
         }
-        .padding(.horizontal)
-        
-        Divider()
-            .foregroundStyle(.white)
     }
 }
 
