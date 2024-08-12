@@ -286,7 +286,7 @@ extension CloudInfoView {
         
         VStack {
             
-            HStack {
+            HStack(alignment: .top) {
                 Text(cloud.name)
                     .font(.largeTitle)
                     .bold()
@@ -297,16 +297,18 @@ extension CloudInfoView {
                     .font(.title)
                     .foregroundStyle(.testAccent)
                     .bold()
+                    .padding(.top, 5)
                 
                 Image(systemName: "square.and.arrow.up.circle.fill")
                     .font(.title)
                     .foregroundStyle(.testAccent)
                     .bold()
+                    .padding(.top, 5)
                 
             }
             .padding(.top, 40)
             
-            Text("Cu Fra")
+            Text("Cu")
                 .font(.title3)
                 .foregroundStyle(.testText)
                 .bold()
@@ -344,7 +346,7 @@ extension CloudInfoView {
                 }
             }
             .padding(.vertical, 5)
-            .padding(.bottom, 5)
+            .padding(.bottom, 10)
             .foregroundStyle(.testText)
             
         }
