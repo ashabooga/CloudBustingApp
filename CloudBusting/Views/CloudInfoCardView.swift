@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WrappingHStack
 
 struct CloudInfoCardView: View {
     
@@ -292,26 +293,28 @@ extension CloudInfoView {
                 
                 Spacer()
                 
+                Image(systemName: "plus.circle.fill")
+                    .font(.title)
+                    .foregroundStyle(.testAccent)
+                    .bold()
+                
                 Image(systemName: "square.and.arrow.up.circle.fill")
-                    .font(.largeTitle)
+                    .font(.title)
                     .foregroundStyle(.testAccent)
                     .bold()
                 
             }
             .padding(.top, 40)
             
-            HStack {
-                
-                Text("Cm")
-                    .font(.title3)
-                    .bold()
-                    .padding(5)
-                    .padding(.horizontal, 5)
-                    .background {
-                        RoundedRectangle(cornerRadius: 25)
-                            .foregroundStyle(.orange)
-                    }
-                
+            Text("Cu Fra")
+                .font(.title3)
+                .foregroundStyle(.testText)
+                .bold()
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .opacity(0.5)
+            
+            WrappingHStack(alignment: .leading, horizontalSpacing: 10, verticalSpacing: 10) {
+
                 Text("Common")
                     .font(.title3)
                     .bold()
@@ -339,24 +342,13 @@ extension CloudInfoView {
                     RoundedRectangle(cornerRadius: 25)
                         .foregroundStyle(.blue)
                 }
-                
-                    
-                
-                
-                Spacer()
             }
-            .padding(.bottom)
+            .padding(.vertical, 5)
+            .padding(.bottom, 5)
             .foregroundStyle(.testText)
             
-//            HStack {
-//                
-//                Spacer()
-//                
-//                Image(systemName: "square.and.pencil")
-//            }
         }
         .padding(.horizontal, 25)
-//        .frame(maxHeight: 200)
     }
     
     private var imagesTitle: some View {

@@ -16,6 +16,7 @@
 		0E3264982C3D241200BF4DBE /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3264972C3D241200BF4DBE /* CameraView.swift */; };
 		0E6896A42C563AEE00FBDBC4 /* StretchyHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6896A32C563AEE00FBDBC4 /* StretchyHeaderView.swift */; };
 		0E7971DD2C6804ED00E27139 /* WeatherContentViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7971DC2C6804ED00E27139 /* WeatherContentViews.swift */; };
+		0E7971E02C6A5CC800E27139 /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = 0E7971DF2C6A5CC800E27139 /* WrappingHStack */; };
 		0E8520162C502A5600E161E4 /* IconsAndSymbolsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8520152C502A5600E161E4 /* IconsAndSymbolsView.swift */; };
 		0E8520182C50ED2300E161E4 /* UserLibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8520172C50ED2300E161E4 /* UserLibraryView.swift */; };
 		0E8749A12C300D3400821646 /* CloudBustingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8749A02C300D3400821646 /* CloudBustingApp.swift */; };
@@ -63,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E7971E02C6A5CC800E27139 /* WrappingHStack in Frameworks */,
 				0ED54AFE2C383D7A000CD8B2 /* Glur in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -165,6 +167,7 @@
 			name = CloudBusting;
 			packageProductDependencies = (
 				0ED54AFD2C383D7A000CD8B2 /* Glur */,
+				0E7971DF2C6A5CC800E27139 /* WrappingHStack */,
 			);
 			productName = CloudBusting;
 			productReference = 0E87499D2C300D3400821646 /* CloudBusting.app */;
@@ -196,6 +199,7 @@
 			mainGroup = 0E8749942C300D3400821646;
 			packageReferences = (
 				0ED54AFC2C383D7A000CD8B2 /* XCRemoteSwiftPackageReference "Glur" */,
+				0E7971DE2C6A5CC800E27139 /* XCRemoteSwiftPackageReference "WrappingHStack" */,
 			);
 			productRefGroup = 0E87499E2C300D3400821646 /* Products */;
 			projectDirPath = "";
@@ -452,6 +456,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		0E7971DE2C6A5CC800E27139 /* XCRemoteSwiftPackageReference "WrappingHStack" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ksemianov/WrappingHStack";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.0;
+			};
+		};
 		0ED54AFC2C383D7A000CD8B2 /* XCRemoteSwiftPackageReference "Glur" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/joogps/Glur";
@@ -463,6 +475,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0E7971DF2C6A5CC800E27139 /* WrappingHStack */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0E7971DE2C6A5CC800E27139 /* XCRemoteSwiftPackageReference "WrappingHStack" */;
+			productName = WrappingHStack;
+		};
 		0ED54AFD2C383D7A000CD8B2 /* Glur */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 0ED54AFC2C383D7A000CD8B2 /* XCRemoteSwiftPackageReference "Glur" */;
