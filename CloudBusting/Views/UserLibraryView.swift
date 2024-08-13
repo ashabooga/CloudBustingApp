@@ -152,10 +152,33 @@ struct YourCloudsListRowView: View {
                 Text(cloud.cloudIdentified.name)
                     .font(.title3)
                     .fontWeight(.semibold)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.top, 10)
+                
+                Text("Cu")
+                    .font(.headline)
+                    .opacity(0.5)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                
+                Spacer()
+                
+                Text("Common")
+                    .font(.subheadline)
+                    .bold()
+                    .padding(5)
+                    .padding(.horizontal, 5)
+                    .background {
+                        RoundedRectangle(cornerRadius: 15)
+                            .foregroundStyle(.teal)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.bottom, 15)
+
             }
+            .foregroundStyle(.testText)
             
-            Spacer()
         }
+        .padding(.vertical, 5)
     }
 }
 
@@ -245,6 +268,7 @@ extension UserLibraryView {
         }
         .font(.title2)
         .fontWeight(.semibold)
+        .contentShape(Rectangle())
     }
     
 }
