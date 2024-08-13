@@ -87,30 +87,14 @@ struct RecentlyScannedIconView: View {
 struct YourCloudsListView: View {
     
     var user: UserModel
-    
-//    init(user: UserModel) {
-//            self.user = user
-//        let appear = UINavigationBarAppearance()
-//
-//        let atters: [NSAttributedString.Key: Any] = [
-//            .font: UIFont(name: "AmericanTypewriter-Bold", size: 35)!
-//        ]
-//
-//        appear.largeTitleTextAttributes = atters
-//        appear.titleTextAttributes = atters
-//        UINavigationBar.appearance().isTranslucent = true
-//        UINavigationBar.appearance().standardAppearance = appear
-//        UINavigationBar.appearance().compactAppearance = appear
-//        UINavigationBar.appearance().scrollEdgeAppearance = appear
-//     }
-    
-    
+    @State private var searchText = ""
+
     var body: some View {
         
         NavigationStack {
             
             List {
-                ForEach(user.collection, id: \.id) { scanAttempt in
+                ForEach(searchResults, id: \.id) { scanAttempt in
                     NavigationLink {
                         ScannedCloudInfoCardView(scanAttempt: scanAttempt)
                     } label: {
@@ -119,6 +103,7 @@ struct YourCloudsListView: View {
                 }
                 .listRowBackground(Color.clear)
             }
+            .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
             .background{
                 Color.testDark.ignoresSafeArea()
                 
@@ -133,6 +118,14 @@ struct YourCloudsListView: View {
             
         }
         
+    }
+    
+    var searchResults: [ScanAttemptModel] {
+        if searchText.isEmpty {
+            return user.collection
+        } else {
+            return user.collection.filter { $0.cloudIdentified.name.contains(searchText) }
+        }
     }
 }
 
@@ -175,6 +168,7 @@ struct YourCloudsListRowView: View {
                     .padding(.bottom, 15)
 
             }
+            .padding(.leading, 5)
             .foregroundStyle(.testText)
             
         }
@@ -219,11 +213,11 @@ extension UserLibraryView {
                 EmptyView()
             } label: {
                 HStack {
-                    Image(systemName: "heart.fill")
+                    Image(systemName: "square.stack.fill")
                         .foregroundStyle(.highlight)
                         .foregroundStyle(.interactiveText)
                     
-                    Text("Wishlists")
+                    Text("Cloud Lists")
                         .padding(3)
                         .foregroundStyle(.interactiveText)
                     
@@ -234,7 +228,7 @@ extension UserLibraryView {
                         
                 }
                 .padding(.vertical, 5)
-                .padding(.leading, 16)
+                .padding(.leading, 17)
                 .padding(.trailing)
             }
 

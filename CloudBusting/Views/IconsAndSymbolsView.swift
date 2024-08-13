@@ -20,6 +20,33 @@ struct SymbolButtonView: View {
     }
 }
 
+struct TagView: View {
+    
+    var fontStyle: Font
+    var title: String
+    var color: Color
+    var icon: String?
+    var iconStyle: Font?
+    
+    var body: some View {
+        
+        HStack {
+            
+            if (icon != nil && iconStyle != nil) {
+                Image(systemName: icon!)
+                    .font(iconStyle!)
+            }
+            
+            Text(title)
+                .bold()
+                .font(fontStyle)
+        }
+        .padding(5)
+        .padding(.horizontal, 5)
+        .background(RoundedRectangle(cornerRadius: 15).foregroundStyle(color))
+    }
+}
+
 #Preview {
     SymbolButtonView(systemName: "square.and.arrow.up")
 }

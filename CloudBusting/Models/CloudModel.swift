@@ -9,7 +9,11 @@ public enum CloudAltitude: String {
     case unknown = "Unknown"
 }
 
-struct CloudModel: Identifiable {
+protocol Cloud {
+    var id: UUID { get }
+}
+
+struct CloudModel: Identifiable, Cloud {
     
     var id: UUID
     var name: String
@@ -39,4 +43,29 @@ struct CloudModel: Identifiable {
     static let Mamma: CloudModel = CloudModel(id: UUID(), name: "Mamma", images: ["Mamma1", "Mamma2"], aboutInfo: "‘What on Earth are those?’ is the usual reaction when people see photographs of mamma clouds. Also known as ‘mammatus’, these ‘supplementary features’ hang down from a layer of cloud in smooth or rough pouches that often have the appearance of udders (which is what ‘mamma’ means in Latin).\nWith such an otherworldly appearance, mamma are a must-have for any cloud collection. They can be found on a whole range of cloud types but the most dramatic examples occur on the underside of the huge anvils, known as incus, that spread out at the top of mature Cumulonimbus storm clouds and can cover all the visible sky.\nSome claim that mamma are harbingers of stormy weather, and what with the association between these cloud pouches and Cumulonimbus, you might think they have a point. But mamma tend to form at the rear, rather than the front, of storms. Once you see mamma formations above you, the storm has usually passed over, or missed you entirely.\nEach lobe of mamma is typically one to two miles across, and appears for around ten minutes. There are several theories about why they form, but an extensive 2006 scientific review of all the studies to date concluded that no one’s really sure.", altitude: CloudAltitude.various, precipitation: "None", cloudsSimilarTo: [:], cloudsToLookFor: [], cloudOfTheDayImage: "Mammatus1")
     
     static let noImage: Image = Image("Cindy-Otter")
+}
+
+
+struct ScanAttemptModel: Identifiable, Cloud {
+    
+    var id: UUID
+    var imageName: String
+    var dateTime: Date
+    var cloudIdentified: CloudModel
+    
+    
+    init(id: UUID, imageName: String, dateTime: Date, cloudIdentified: CloudModel) {
+        self.id = id
+        self.imageName = imageName
+        self.dateTime = dateTime
+        self.cloudIdentified = cloudIdentified
+    }
+    
+//    func hash(into hasher: inout Hasher) {
+//        hasher.combine(id)
+//    }
+//
+//    static func == (lhs: ScanAttemptModel, rhs: ScanAttemptModel) -> Bool {
+//        return lhs.id == rhs.id
+//    }
 }

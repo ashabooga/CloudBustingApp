@@ -22,7 +22,7 @@ struct CloudInfoCardView: View {
                     
                     StretchyHeaderView(image: Image("Cindy-Otter"), initialHeaderHeight: 350)
                     
-                    CloudInfoView(cloud: cloud)
+                    CloudInfoView(cloud: cloud, isScanned: false)
                         .clipShape(
                             .rect(topLeadingRadius: 25, topTrailingRadius: 25)
                         )
@@ -50,7 +50,7 @@ struct ScannedCloudInfoCardView: View {
                     
                     StretchyHeaderView(image: Image(scanAttempt.imageName), initialHeaderHeight: 350)
                     
-                    CloudInfoView(cloud: scanAttempt.cloudIdentified)
+                    CloudInfoView(cloud: scanAttempt.cloudIdentified, isScanned: true)
                         .clipShape(
                             .rect(topLeadingRadius: 25, topTrailingRadius: 25)
                         )
@@ -67,6 +67,7 @@ struct ScannedCloudInfoCardView: View {
 struct CloudInfoView: View {
     
     let cloud: CloudModel
+    let isScanned: Bool
     
     var body: some View {
             
@@ -134,10 +135,6 @@ struct CloudInfoView: View {
 //                
 //                asSeenInArtworkTitle
                 
-                
-                
-                
-//                TestView()
             }
         }
     }
@@ -192,6 +189,7 @@ struct SimilarCloudCardView: View {
             
             HStack {
                 Image(systemName: "exclamationmark.triangle.fill")
+//                    .symbolRenderingMode(.hierarchical)
                 
                 Text(name)
 
@@ -227,31 +225,6 @@ struct lookOutForCloudCardView: View {
     var body: some View {
         
         ZStack {
-//            
-//            ColoredGlassView(centerUnitPoint: .top, radius: 1500)
-//                .ignoresSafeArea()
-//            
-//            VStack {
-//                Image(image)
-//                    .resizable()
-//                    .aspectRatio(contentMode: .fill)
-//                    .frame(height: 200)
-//                    .clipped()
-//                
-//
-//                Text(name)
-//                    .font(.title2)
-//                    .bold()
-//                    .frame(maxWidth: .infinity, alignment: .leading)
-//                    .padding(.leading, 25)
-//                    .padding(.top)
-//                
-//            }
-//            .foregroundStyle(.nonInteractiveText)
-//            .multilineTextAlignment(.leading)
-//            .padding(.bottom)
-            
-            
             Image(image)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
@@ -293,14 +266,16 @@ extension CloudInfoView {
                 
                 Spacer()
                 
-                Image(systemName: "plus.circle.fill")
+                Image(systemName: isScanned ? "plus.circle.fill" : "heart.circle.fill")
                     .font(.title)
+                    .symbolRenderingMode(.hierarchical)
                     .foregroundStyle(.testAccent)
                     .bold()
                     .padding(.top, 5)
                 
                 Image(systemName: "square.and.arrow.up.circle.fill")
                     .font(.title)
+                    .symbolRenderingMode(.hierarchical)
                     .foregroundStyle(.testAccent)
                     .bold()
                     .padding(.top, 5)
@@ -317,33 +292,10 @@ extension CloudInfoView {
             
             WrappingHStack(alignment: .leading, horizontalSpacing: 10, verticalSpacing: 10) {
 
-                Text("Common")
-                    .font(.title3)
-                    .bold()
-                    .padding(5)
-                    .padding(.horizontal, 5)
-                    .background {
-                        RoundedRectangle(cornerRadius: 25)
-                            .foregroundStyle(.teal)
-                    }
+                TagView(fontStyle: .headline, title: "Common", color: .teal)
                 
                 
-                HStack {
-                    
-                    Image(systemName: "umbrella.fill")
-                        .font(.headline)
-                    
-                    Text("Unlikely")
-                    
-                }
-                .font(.title3)
-                .bold()
-                .padding(5)
-                .padding(.horizontal, 5)
-                .background {
-                    RoundedRectangle(cornerRadius: 25)
-                        .foregroundStyle(.blue)
-                }
+                TagView(fontStyle: .headline, title: "Unlikely", color: .blue, icon: "umbrella.fill", iconStyle: .subheadline)
             }
             .padding(.vertical, 5)
             .padding(.bottom, 10)
@@ -748,5 +700,5 @@ extension CloudInfoView {
 
 
 #Preview {
-    ScannedCloudInfoCardView(scanAttempt: UserModel.exampleUser.scanAttempts[0])
+    CloudInfoCardView(cloud: CloudModel.Cumulus)
 }

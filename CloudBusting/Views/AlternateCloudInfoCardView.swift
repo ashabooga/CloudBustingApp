@@ -26,7 +26,7 @@ struct AlternateCloudInfoCardView: View {
                     .fill(Color.clear)
                     .frame(height: 200)
                 
-                CloudInfoView(cloud: cloud)
+                CloudInfoView(cloud: cloud, isScanned: <#Bool#>)
                     .clipShape(
                         .rect(topLeadingRadius: 25, topTrailingRadius: 25)
                     )
