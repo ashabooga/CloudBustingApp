@@ -137,6 +137,7 @@ struct CloudInfoView: View {
                 
             }
         }
+//        .toolbar(.hidden, for: .tabBar)
     }
 }
 

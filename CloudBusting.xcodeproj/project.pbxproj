@@ -17,6 +17,7 @@
 		0E7971DD2C6804ED00E27139 /* WeatherContentViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7971DC2C6804ED00E27139 /* WeatherContentViews.swift */; };
 		0E7971E02C6A5CC800E27139 /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = 0E7971DF2C6A5CC800E27139 /* WrappingHStack */; };
 		0E7971E22C6BD18100E27139 /* CloudListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7971E12C6BD18100E27139 /* CloudListModel.swift */; };
+		0E7971E42C6C0A2200E27139 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7971E32C6C0A2200E27139 /* MainView.swift */; };
 		0E8520162C502A5600E161E4 /* IconsAndSymbolsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8520152C502A5600E161E4 /* IconsAndSymbolsView.swift */; };
 		0E8520182C50ED2300E161E4 /* UserLibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8520172C50ED2300E161E4 /* UserLibraryView.swift */; };
 		0E8749A12C300D3400821646 /* CloudBustingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E8749A02C300D3400821646 /* CloudBustingApp.swift */; };
@@ -42,6 +43,7 @@
 		0E6896A32C563AEE00FBDBC4 /* StretchyHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StretchyHeaderView.swift; sourceTree = "<group>"; };
 		0E7971DC2C6804ED00E27139 /* WeatherContentViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherContentViews.swift; sourceTree = "<group>"; };
 		0E7971E12C6BD18100E27139 /* CloudListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudListModel.swift; sourceTree = "<group>"; };
+		0E7971E32C6C0A2200E27139 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		0E8520152C502A5600E161E4 /* IconsAndSymbolsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconsAndSymbolsView.swift; sourceTree = "<group>"; };
 		0E8520172C50ED2300E161E4 /* UserLibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLibraryView.swift; sourceTree = "<group>"; };
 		0E87499D2C300D3400821646 /* CloudBusting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CloudBusting.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -123,6 +125,7 @@
 				0E6896A32C563AEE00FBDBC4 /* StretchyHeaderView.swift */,
 				0E7971DC2C6804ED00E27139 /* WeatherContentViews.swift */,
 				0ED54AFF2C38405C000CD8B2 /* Extensions.swift */,
+				0E7971E32C6C0A2200E27139 /* MainView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -237,6 +240,7 @@
 				0EF7B1F62C5A2B820056076B /* UserViewModel.swift in Sources */,
 				0E7971DD2C6804ED00E27139 /* WeatherContentViews.swift in Sources */,
 				0E8520162C502A5600E161E4 /* IconsAndSymbolsView.swift in Sources */,
+				0E7971E42C6C0A2200E27139 /* MainView.swift in Sources */,
 				0E167D242C31B8C700B9263C /* ArticleModel.swift in Sources */,
 				0E6896A42C563AEE00FBDBC4 /* StretchyHeaderView.swift in Sources */,
 				0E8749A12C300D3400821646 /* CloudBustingApp.swift in Sources */,
