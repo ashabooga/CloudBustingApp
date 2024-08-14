@@ -11,6 +11,7 @@ import SwiftUI
 struct MainView: View {
     
 //    @State private var selectedIndex: Int = 0
+    @StateObject var userViewModel: UserViewModel
     
     var body: some View {
         TabView {
@@ -25,7 +26,7 @@ struct MainView: View {
                     Label("Camera", systemImage: "camera.viewfinder")
                 }
             
-            UserLibraryView(user: UserModel.exampleUser)
+            UserLibraryView(userViewModel: userViewModel)
                 .tabItem {
                     Label("Library", systemImage: "square.stack.fill")
                 }
@@ -35,5 +36,5 @@ struct MainView: View {
 }
 
 #Preview {
-    MainView()
+    MainView(userViewModel: UserViewModel(user: UserModel.exampleUser))
 }

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct UserLibraryView: View {
     
-    let user: UserModel
+    @ObservedObject var userViewModel: UserViewModel
     
     var body: some View {
         NavigationStack {
@@ -36,7 +36,7 @@ struct UserLibraryView: View {
 
                         
                         LazyVGrid(columns: [GridItem(.flexible(), spacing: 20), GridItem(.flexible(), spacing: 20)], spacing: 20) {
-                            ForEach(user.scanAttempts, id: \.id) { scanAttempt in
+                            ForEach(userViewModel.user.scanAttempts, id: \.id) { scanAttempt in
                                 
                                 NavigationLink {
                                     ScannedCloudInfoCardView(scanAttempt: scanAttempt)
@@ -86,7 +86,7 @@ struct RecentlyScannedIconView: View {
 
 struct YourCloudsListView: View {
     
-    var user: UserModel
+    @ObservedObject var userViewModel: UserViewModel
     @State private var searchText = ""
 
     var body: some View {
@@ -122,9 +122,9 @@ struct YourCloudsListView: View {
     
     var searchResults: [ScanAttemptModel] {
         if searchText.isEmpty {
-            return user.collection
+            return userViewModel.user.collection
         } else {
-            return user.collection.filter { $0.cloudIdentified.name.contains(searchText) }
+            return userViewModel.user.collection.filter { $0.cloudIdentified.name.contains(searchText) }
         }
     }
 }
@@ -146,14 +146,11 @@ struct YourCloudsListRowView: View {
                     .font(.title3)
                     .fontWeight(.semibold)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.top, 10)
                 
                 Text("Cu")
                     .font(.headline)
                     .opacity(0.5)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                
-                Spacer()
                 
                 Text("Common")
                     .font(.subheadline)
@@ -165,8 +162,87 @@ struct YourCloudsListRowView: View {
                             .foregroundStyle(.teal)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.bottom, 15)
 
+            }
+            .padding(.leading, 5)
+            .foregroundStyle(.testText)
+            
+        }
+        .padding(.vertical, 5)
+    }
+}
+
+struct CloudListsListView: View {
+    @ObservedObject var userViewModel: UserViewModel
+    @State private var searchText = ""
+
+    var body: some View {
+        
+        NavigationStack {
+            
+            List {
+                ForEach(searchResults, id: \.id) { cloudList in
+                    NavigationLink {
+                        EmptyView()
+                    } label: {
+                        CloudListsListRowView(cloudList: cloudList)
+                    }
+                    .contextMenu {
+                        Button(role: .destructive) {
+                            userViewModel.removeCloudList(withID: cloudList.id)
+                        } label: {
+                            Label("Delete CloudList", systemImage: "trash")
+                                .foregroundStyle(.red)
+                        }
+
+                    } preview: {
+                        Image(cloudList.clouds.first?.cloud.displayImage ?? "Cindy-Otter")
+                    }
+                }
+                .listRowBackground(Color.clear)
+            }
+            .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
+            .background{
+                Color.testDark.ignoresSafeArea()
+                
+                LinearGradient(stops: [
+                    .init(color: .testLight, location: 0),
+                    .init(color: .clear, location: 0.4)
+                ], startPoint: .top, endPoint: .bottom)
+                .ignoresSafeArea()
+            }
+            .listStyle(.plain)
+            .navigationTitle("Cloud Lists")
+            
+        }
+        
+    }
+    
+    var searchResults: [CloudListModel] {
+        if searchText.isEmpty {
+            return userViewModel.user.cloudLists
+        } else {
+            return userViewModel.user.cloudLists.filter { $0.title.contains(searchText) }
+        }
+    }
+}
+
+struct CloudListsListRowView: View {
+    var cloudList: CloudListModel
+    
+    var body: some View {
+        HStack {
+            Image(cloudList.clouds.first?.cloud.displayImage ?? "Cindy-Otter")
+                .resizable()
+                .frame(width: 75, height: 75)
+                .scaledToFill()
+                .clipShape(RoundedRectangle(cornerRadius: 5))
+            
+            VStack {
+                Text(cloudList.title)
+                    .font(.title3)
+                    .fontWeight(.semibold)
+                    .frame(maxWidth: .infinity, alignment: .leading)
             }
             .padding(.leading, 5)
             .foregroundStyle(.testText)
@@ -182,13 +258,11 @@ extension UserLibraryView {
         VStack {
             
             NavigationLink {
-                YourCloudsListView(user: user)
+                YourCloudsListView(userViewModel: userViewModel)
             } label: {
                 HStack {
                     Image(systemName: "cloud.fill")
                         .foregroundStyle(.highlight)
-                    
-                    
                     
                     Text("Your Clouds")
                         .padding(3)
@@ -210,10 +284,10 @@ extension UserLibraryView {
             
             
             NavigationLink {
-                EmptyView()
+                CloudListsListView(userViewModel: userViewModel)
             } label: {
                 HStack {
-                    Image(systemName: "square.stack.fill")
+                    Image(systemName: "list.bullet.clipboard.fill")
                         .foregroundStyle(.highlight)
                         .foregroundStyle(.interactiveText)
                     
@@ -286,6 +360,6 @@ extension UserLibraryView {
 }
 
 #Preview {
-    UserLibraryView(user: UserModel.exampleUser)
+    UserLibraryView(userViewModel: UserViewModel(user: UserModel.exampleUser))
 //    YourCloudsListView(user: UserModel.exampleUser)
 }

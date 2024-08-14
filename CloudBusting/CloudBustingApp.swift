@@ -11,8 +11,7 @@ import SwiftUI
 struct CloudBustingApp: App {
     var body: some Scene {
         WindowGroup {
-            UserLibraryView(user: UserModel.exampleUser)
-//            CloudInfoCardView(cloud: CloudModel.Cumulus)
+            MainView(userViewModel: UserViewModel(user: UserModel.exampleUser))
         }
     }
 }
