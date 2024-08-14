@@ -168,7 +168,6 @@ struct YourCloudsListRowView: View {
             .foregroundStyle(.testText)
             
         }
-        .padding(.vertical, 5)
     }
 }
 
@@ -196,7 +195,26 @@ struct CloudListsListView: View {
                         }
 
                     } preview: {
-                        Image(cloudList.clouds.first?.cloud.displayImage ?? "Cindy-Otter")
+                        VStack {
+                            Image(cloudList.clouds.first?.cloud.displayImage ?? "Cindy-Otter")
+                                .resizable()
+                                .frame(width: 300, height: 300)
+                                .scaledToFill()
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
+                                .padding()
+                            
+                            HStack {
+                                Text(cloudList.title)
+                                Spacer()
+                            }
+                            .padding(.horizontal)
+                            .padding(.bottom)
+                            
+                        }
+                        .onAppear {
+                            guard let window = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first else { return }
+                            window.overrideUserInterfaceStyle = .dark
+                        }
                     }
                 }
                 .listRowBackground(Color.clear)
@@ -248,7 +266,6 @@ struct CloudListsListRowView: View {
             .foregroundStyle(.testText)
             
         }
-        .padding(.vertical, 5)
     }
 }
 
