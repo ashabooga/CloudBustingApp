@@ -29,8 +29,6 @@ struct CloudInfoCardView: View {
                         .padding(.bottom, 25)
                         .padding(.top, -35)
                 }
-                .ignoresSafeArea()
-                .frame(maxHeight: .infinity)
             }
         }
     }
@@ -57,8 +55,7 @@ struct ScannedCloudInfoCardView: View {
                         .padding(.bottom, 25)
                         .padding(.top, -35)
                 }
-                .ignoresSafeArea()
-                .frame(maxHeight: .infinity)
+                .padding(.bottom, 25)
             }
         }
     }
@@ -285,7 +282,7 @@ extension CloudInfoView {
             .padding(.top, 40)
             
             Text("Cu")
-                .font(.title3)
+                .font(.title2)
                 .foregroundStyle(.testText)
                 .bold()
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -354,86 +351,205 @@ extension CloudInfoView {
     }
     
     private var keyInformationSection: some View {
-        VStack {
-            
+//        VStack {
+//            
+//            Text("The Cumulus cloud stays at low altitudes with potential to go higher, has a low precipitation chance, and has a low to medium Liquid Water Content (LWC).")
+//                .paragraphText()
+//                .padding()
+//                .background (Color.fill)
+//                .clipShape(RoundedRectangle(cornerRadius: 25))
+//                .padding(.horizontal)
+//                .fixedSize(horizontal: false, vertical: true)
+//            
+//            HStack {
+//                VStack {
+//                    HStack {
+//                        Image(systemName: "ruler")
+//                            .rotationEffect(.degrees(-90))
+//                        
+//                        Text("Altitude")
+//                            .font(.headline)
+//                            .bold()
+//                        
+//                        Spacer()
+//
+//                    }
+//                    .foregroundStyle(.black)
+//                    .opacity(0.5)
+//                    .padding(.horizontal)
+//                    .padding(.top)
+//                    
+//                    
+//                        
+//                    AltitudeChartView(cloud: cloud)
+//                        .padding(.top)
+//                        .padding(.horizontal)
+//                        .padding(.bottom, 10)
+//                    
+//                    Text("300 - 1900m")
+//                        .foregroundStyle(.testText)
+//                        .font(.headline)
+//                        .fontWeight(.bold)
+//                        .frame(maxWidth: .infinity, alignment: .leading)
+//                        .padding(.horizontal)
+//                    
+//                    Text("Low")
+//                        .foregroundStyle(.testText)
+//                        .font(.subheadline)
+//                        .fontWeight(.semibold)
+//                        .padding(.bottom, 20)
+//                        .frame(maxWidth: .infinity, alignment: .leading)
+//                        .padding(.horizontal)
+//                    
+//
+//                }
+////                .frame(width: 175, height: 370)
+//                .padding(.trailing, 10)
+//                .aspectRatio(0.5, contentMode: .fit)
+//                .background(Color.fill)
+//                .clipShape(RoundedRectangle(cornerRadius: 25))
+//
+////                Spacer()
+//                
+//                
+//                
+//                VStack {
+//                    VStack {
+//                        HStack {
+//                            Image(systemName: "umbrella.fill")
+//                            
+//                            Text("Precipitation")
+//                                .font(.headline)
+//                                .bold()
+//                            
+//                            Spacer()
+//                        }
+//                        .foregroundStyle(.black)
+//                        .opacity(0.5)
+//                        .padding()
+//                        .frame(maxHeight: .infinity, alignment: .top)
+//                        
+//                        Spacer()
+//                        
+//                        Gauge(value: 10, in: 0...100) {
+//                            
+//                   
+//                        } currentValueLabel: {
+//                            Image(systemName: "cloud.sun.fill")
+//                                .resizable()
+//                                .scaledToFit()
+//                                .frame(width: 25)
+//                                .foregroundStyle(.testText)
+//                        }
+//                        .tint(.testText)
+//                        .opacity(0.7)
+//                        .gaugeStyle(.accessoryCircular)
+//                        .scaleEffect(1.3)
+//                        .padding(.vertical, 5)
+//                        
+//                        
+//                        Spacer()
+//                        
+//                        Text("Unlikely")
+//                            .foregroundStyle(.testText)
+//                            .font(.headline)
+//                            .fontWeight(.bold)
+//                            .padding(.bottom, 20)
+//
+//                        
+//                    }
+////                    .frame(width: 175, height: 175)
+//                    .aspectRatio(1.0, contentMode: .fit)
+//                    .background(Color.fill)
+//                    .clipShape(RoundedRectangle(cornerRadius: 25))
+//                    .padding(.bottom, 5)
+//                    .padding(.leading, 10)
+//                    
+//                    VStack {
+//                        HStack {
+//                            
+//                            Spacer()
+//                            
+//                            Image(systemName: "drop.fill")
+//                            
+//                            Text("Water Content")
+//                                .font(.headline)
+//                                .bold()
+//                            
+//                            Spacer()
+//                        }
+//                        .foregroundStyle(.black)
+//                        .opacity(0.5)
+//                        .padding(.vertical)
+////                        .border(.black)
+//                        
+//                        Text("0.3 g/m\u{00B3}")
+//                            .font(.largeTitle)
+//                            .fontWeight(.medium)
+//                            .frame(maxWidth: .infinity, alignment: .topLeading)
+//                            .padding(.horizontal)
+//                            .foregroundStyle(.testText)
+//                            .padding(.top, -5)
+//                        
+//                        Spacer()
+//                        
+//                        Text("Liquid")
+//                            .foregroundStyle(.testText)
+//                            .font(.headline)
+//                            .fontWeight(.bold)
+//                            .frame(maxWidth: .infinity, alignment: .leading)
+//                            .padding(.horizontal)
+//                        
+//                        Text("Low - Medium")
+//                            .foregroundStyle(.testText)
+//                            .font(.subheadline)
+//                            .fontWeight(.semibold)
+//                            .padding(.bottom, 20)
+//                            .frame(maxWidth: .infinity, alignment: .leading)
+//                            .padding(.horizontal)
+//                        
+//                        
+//                    }
+////                    .frame(width: 175, height: 175)
+//                    .aspectRatio(1.0, contentMode: .fit)
+//                    .background(Color.fill)
+//                    .clipShape(RoundedRectangle(cornerRadius: 25))
+//                    .padding(.top, 5)
+//                    .padding(.leading, 10)
+//                }
+////                .padding(.leading, 5)
+//                
+//            }
+//            .padding()
+////            .frame(height: 400)
+//        }
+        
+        VStack(spacing: 10) {
             Text("The Cumulus cloud stays at low altitudes with potential to go higher, has a low precipitation chance, and has a low to medium Liquid Water Content (LWC).")
                 .paragraphText()
                 .padding()
-                .background (Color.fill)
-                .clipShape(RoundedRectangle(cornerRadius: 25))
-                .padding(.horizontal)
-                .fixedSize(horizontal: false, vertical: true)
-            
-            HStack {
-                VStack {
-                    HStack {
-                        Image(systemName: "ruler")
-                            .rotationEffect(.degrees(-90))
-                        
-                        Text("Altitude")
-                            .font(.headline)
-                            .bold()
-                        
-                        Spacer()
-
-                    }
-                    .foregroundStyle(.black)
-                    .opacity(0.5)
-                    .padding(.horizontal)
-                    .padding(.top)
-                    
-                    
-                        
-                    AltitudeChartView(cloud: cloud)
-                        .padding(.top)
-                        .padding(.horizontal)
-                        .padding(.bottom, 10)
-                    
-                    Text("300 - 1900m")
-                        .foregroundStyle(.testText)
-                        .font(.headline)
-                        .fontWeight(.bold)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.horizontal)
-                    
-                    Text("Low")
-                        .foregroundStyle(.testText)
-                        .font(.subheadline)
-                        .fontWeight(.semibold)
-                        .padding(.bottom, 20)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.horizontal)
-                    
-
-                }
-                .frame(width: 175, height: 370)
                 .background(Color.fill)
                 .clipShape(RoundedRectangle(cornerRadius: 25))
-                .padding(.trailing, 5)
+            
+            HStack(spacing: 10) {
+                // Left column
+                InfoCard(title: "Altitude", icon: "ruler", shouldRotateIcon: true, alignment: .leading) {
+                    AltitudeChartView(cloud: cloud)
+                    Text("300 - 1900m")
+                        .infoHeadline()
+                    Text("Low")
+                        .infoSubheadline()
+                }
+                .frame(width: UIScreen.main.bounds.width * 0.45)
                 
-                
-                
-                VStack {
-                    VStack {
-                        HStack {
-                            Image(systemName: "umbrella.fill")
-                            
-                            Text("Precipitation")
-                                .font(.headline)
-                                .bold()
-                            
-                            Spacer()
-                        }
-                        .foregroundStyle(.black)
-                        .opacity(0.5)
-                        .padding()
-                        .frame(maxHeight: .infinity, alignment: .top)
+                // Right column
+                VStack(spacing: 10) {
+                    
+                    InfoCard(title: "Precipitation", icon: "umbrella.fill", shouldRotateIcon: false, alignment: .center) {
                         
                         Spacer()
-                        
-                        Gauge(value: 10, in: 0...100) {
                             
-                   
+                        Gauge(value: 10, in: 0...100) {
                         } currentValueLabel: {
                             Image(systemName: "cloud.sun.fill")
                                 .resizable()
@@ -444,81 +560,42 @@ extension CloudInfoView {
                         .tint(.testText)
                         .opacity(0.7)
                         .gaugeStyle(.accessoryCircular)
-                        .scaleEffect(1.3)
-                        .padding(.vertical, 5)
-                        
-                        
-                        Spacer()
+                        .scaleEffect(1.5)
                         
                         Text("Unlikely")
-                            .foregroundStyle(.testText)
-                            .font(.headline)
-                            .fontWeight(.bold)
-                            .padding(.bottom, 20)
-
+                            .infoHeadline()
+                            .padding(.bottom, 5)
                         
                     }
-                    .frame(width: 175, height: 175)
-                    .background(Color.fill)
-                    .clipShape(RoundedRectangle(cornerRadius: 25))
-                    .padding(.bottom, 5)
+                    .frame(maxWidth: .infinity)
+                    .aspectRatio(1.0, contentMode: .fit)
+
+//                    .frame(width: UIScreen.main.bounds.width * 0.45)
+//                    .frame(maxHeight: .infinity)
                     
-                    VStack {
-                        HStack {
-                            
-                            Spacer()
-                            
-                            Image(systemName: "drop.fill")
-                            
-                            Text("Water Content")
-                                .font(.headline)
-                                .bold()
-                            
-                            Spacer()
-                        }
-                        .foregroundStyle(.black)
-                        .opacity(0.5)
-                        .padding(.vertical)
-//                        .border(.black)
-                        
-                        Text("0.3 g/m\u{00B3}")
+                    
+                    InfoCard(title: "Water Content", icon: "drop.fill", shouldRotateIcon: false, alignment: .leading) {
+                        Text("0.3 g/m³")
                             .font(.largeTitle)
                             .fontWeight(.medium)
-                            .frame(maxWidth: .infinity, alignment: .topLeading)
-                            .padding(.horizontal)
                             .foregroundStyle(.testText)
-                            .padding(.top, -5)
+                            .padding(.top, 1)
                         
                         Spacer()
                         
                         Text("Liquid")
-                            .foregroundStyle(.testText)
-                            .font(.headline)
-                            .fontWeight(.bold)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.horizontal)
-                        
+                            .infoHeadline()
                         Text("Low - Medium")
-                            .foregroundStyle(.testText)
-                            .font(.subheadline)
-                            .fontWeight(.semibold)
-                            .padding(.bottom, 20)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.horizontal)
-                        
-                        
+                            .infoSubheadline()
                     }
-                    .frame(width: 175, height: 175)
-                    .background(Color.fill)
-                    .clipShape(RoundedRectangle(cornerRadius: 25))
-                    .padding(.top, 5)
+                    .frame(maxWidth: .infinity)
+                    .aspectRatio(1.0, contentMode: .fit)
                 }
-                .padding(.leading, 5)
-                
+//                .aspectRatio(0.4, contentMode: .fit)
+//                .frame(maxWidth: .infinity)
             }
-            .padding()
-            .frame(height: 400)
         }
+        .padding()
     }
     
     private var identificationTitle: some View {
@@ -696,6 +773,44 @@ extension CloudInfoView {
         EmptyView()
     }
     
+}
+
+struct InfoCard<Content: View>: View {
+    let title: String
+    let icon: String
+    let shouldRotateIcon: Bool
+    let alignment: HorizontalAlignment
+    @ViewBuilder let content: () -> Content
+    
+    var body: some View {
+        VStack(alignment: alignment) {
+            HStack {
+                
+                Image(systemName: icon)
+                    .if(shouldRotateIcon) { view in
+                        view.rotationEffect(.degrees(-90))
+                    }
+                Text(title)
+                    .font(.headline)
+                    .bold()
+                    .if(shouldRotateIcon) { view in
+                        view.padding(.leading, -5)
+                    }
+
+                if (alignment != .leading) {
+                    Spacer()
+                }
+                
+            }
+            .foregroundStyle(.black)
+            .opacity(0.5)
+            
+            content()
+        }
+        .padding()
+        .background(Color.fill)
+        .clipShape(RoundedRectangle(cornerRadius: 25))
+    }
 }
 
 

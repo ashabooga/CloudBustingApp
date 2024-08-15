@@ -13,6 +13,21 @@ extension View {
     func thinBorder() -> some View {
         self.overlay(RoundedRectangle(cornerRadius: 25).stroke(.gray, lineWidth: 0.5))
     }
+    
+
+    func infoHeadline() -> some View {
+        self.foregroundStyle(.testText)
+            .font(.headline)
+            .fontWeight(.bold)
+            .frame(alignment: .leading)
+    }
+    
+    func infoSubheadline() -> some View {
+        self.foregroundStyle(.testText)
+            .font(.subheadline)
+            .fontWeight(.semibold)
+            .frame(alignment: .leading)
+    }
 }
 
 extension Text {

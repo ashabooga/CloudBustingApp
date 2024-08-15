@@ -198,8 +198,8 @@ struct CloudListsListView: View {
                         VStack {
                             Image(cloudList.clouds.first?.cloud.displayImage ?? "Cindy-Otter")
                                 .resizable()
-                                .frame(width: 300, height: 300)
                                 .scaledToFill()
+                                .frame(width: 300, height: 300)
                                 .clipShape(RoundedRectangle(cornerRadius: 10))
                                 .padding()
                             
