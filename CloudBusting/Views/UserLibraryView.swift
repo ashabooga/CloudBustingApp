@@ -135,37 +135,36 @@ struct YourCloudsListRowView: View {
     
     var body: some View {
         HStack {
-            Image(cloud.imageName)
+            Image(cloud.displayImage)
                 .resizable()
                 .frame(width: 100, height: 100)
                 .scaledToFill()
                 .clipShape(RoundedRectangle(cornerRadius: 5))
             
-            VStack {
-                Text(cloud.cloudIdentified.name)
+            VStack(alignment: .leading) {
+                Text(cloud.name)
                     .font(.title3)
                     .fontWeight(.semibold)
-                    .frame(maxWidth: .infinity, alignment: .leading)
                 
-                Text("Cu")
+                Text(cloud.abbreviation)
                     .font(.headline)
                     .opacity(0.5)
-                    .frame(maxWidth: .infinity, alignment: .leading)
                 
-                Text("Common")
-                    .font(.subheadline)
-                    .bold()
-                    .padding(5)
-                    .padding(.horizontal, 5)
-                    .background {
-                        RoundedRectangle(cornerRadius: 15)
-                            .foregroundStyle(.teal)
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                Spacer()
+
+                HStack {
+                    Image(systemName: "map.fill")
+                        .font(.subheadline)
+                    
+                    Text("Berlin, Germany")
+                        .font(.headline)
+                }
+                .opacity(0.5)
 
             }
             .padding(.leading, 5)
             .foregroundStyle(.testText)
+            .padding(.vertical)
             
         }
     }
@@ -182,7 +181,7 @@ struct CloudListsListView: View {
             List {
                 ForEach(searchResults, id: \.id) { cloudList in
                     NavigationLink {
-                        CloudListView(cloudListViewModel: CloudListViewModel(cloudList: cloudList))
+                        CloudListView(cloudListViewModel: CloudListViewModel(cloudList: cloudList), userViewModel: userViewModel)
                     } label: {
                         CloudListsListRowView(cloudList: cloudList)
                     }
@@ -256,11 +255,10 @@ struct CloudListsListRowView: View {
                 .scaledToFill()
                 .clipShape(RoundedRectangle(cornerRadius: 5))
             
-            VStack {
+            VStack(alignment: .leading) {
                 Text(cloudList.title)
                     .font(.title3)
                     .fontWeight(.semibold)
-                    .frame(maxWidth: .infinity, alignment: .leading)
             }
             .padding(.leading, 5)
             .foregroundStyle(.testText)

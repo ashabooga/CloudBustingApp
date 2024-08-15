@@ -56,8 +56,8 @@ struct CloudListModel: Identifiable {
         clouds.append(.scanAttempt(scanAttempt))
     }
 
-    mutating func removeCloud(at index: Int) {
-        clouds.remove(at: index)
+    mutating func removeCloud(withID id: UUID) {
+        clouds.removeAll{ $0.id == id }
     }
     
     

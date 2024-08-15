@@ -26,7 +26,7 @@ struct CloudInfoCardView: View {
                         .clipShape(
                             .rect(topLeadingRadius: 25, topTrailingRadius: 25)
                         )
-                        .padding(.bottom, 25)
+//                        .padding(.bottom, 25)
                         .padding(.top, -35)
                 }
             }
@@ -123,6 +123,7 @@ struct CloudInfoView: View {
                 }
                 
                 lookOutForSection
+                    
                 
 //                formationAndDevelopmentTitle
 //                
@@ -133,6 +134,7 @@ struct CloudInfoView: View {
 //                asSeenInArtworkTitle
                 
             }
+            .padding(.bottom, 50)
         }
 //        .toolbar(.hidden, for: .tabBar)
     }
@@ -351,178 +353,6 @@ extension CloudInfoView {
     }
     
     private var keyInformationSection: some View {
-//        VStack {
-//            
-//            Text("The Cumulus cloud stays at low altitudes with potential to go higher, has a low precipitation chance, and has a low to medium Liquid Water Content (LWC).")
-//                .paragraphText()
-//                .padding()
-//                .background (Color.fill)
-//                .clipShape(RoundedRectangle(cornerRadius: 25))
-//                .padding(.horizontal)
-//                .fixedSize(horizontal: false, vertical: true)
-//            
-//            HStack {
-//                VStack {
-//                    HStack {
-//                        Image(systemName: "ruler")
-//                            .rotationEffect(.degrees(-90))
-//                        
-//                        Text("Altitude")
-//                            .font(.headline)
-//                            .bold()
-//                        
-//                        Spacer()
-//
-//                    }
-//                    .foregroundStyle(.black)
-//                    .opacity(0.5)
-//                    .padding(.horizontal)
-//                    .padding(.top)
-//                    
-//                    
-//                        
-//                    AltitudeChartView(cloud: cloud)
-//                        .padding(.top)
-//                        .padding(.horizontal)
-//                        .padding(.bottom, 10)
-//                    
-//                    Text("300 - 1900m")
-//                        .foregroundStyle(.testText)
-//                        .font(.headline)
-//                        .fontWeight(.bold)
-//                        .frame(maxWidth: .infinity, alignment: .leading)
-//                        .padding(.horizontal)
-//                    
-//                    Text("Low")
-//                        .foregroundStyle(.testText)
-//                        .font(.subheadline)
-//                        .fontWeight(.semibold)
-//                        .padding(.bottom, 20)
-//                        .frame(maxWidth: .infinity, alignment: .leading)
-//                        .padding(.horizontal)
-//                    
-//
-//                }
-////                .frame(width: 175, height: 370)
-//                .padding(.trailing, 10)
-//                .aspectRatio(0.5, contentMode: .fit)
-//                .background(Color.fill)
-//                .clipShape(RoundedRectangle(cornerRadius: 25))
-//
-////                Spacer()
-//                
-//                
-//                
-//                VStack {
-//                    VStack {
-//                        HStack {
-//                            Image(systemName: "umbrella.fill")
-//                            
-//                            Text("Precipitation")
-//                                .font(.headline)
-//                                .bold()
-//                            
-//                            Spacer()
-//                        }
-//                        .foregroundStyle(.black)
-//                        .opacity(0.5)
-//                        .padding()
-//                        .frame(maxHeight: .infinity, alignment: .top)
-//                        
-//                        Spacer()
-//                        
-//                        Gauge(value: 10, in: 0...100) {
-//                            
-//                   
-//                        } currentValueLabel: {
-//                            Image(systemName: "cloud.sun.fill")
-//                                .resizable()
-//                                .scaledToFit()
-//                                .frame(width: 25)
-//                                .foregroundStyle(.testText)
-//                        }
-//                        .tint(.testText)
-//                        .opacity(0.7)
-//                        .gaugeStyle(.accessoryCircular)
-//                        .scaleEffect(1.3)
-//                        .padding(.vertical, 5)
-//                        
-//                        
-//                        Spacer()
-//                        
-//                        Text("Unlikely")
-//                            .foregroundStyle(.testText)
-//                            .font(.headline)
-//                            .fontWeight(.bold)
-//                            .padding(.bottom, 20)
-//
-//                        
-//                    }
-////                    .frame(width: 175, height: 175)
-//                    .aspectRatio(1.0, contentMode: .fit)
-//                    .background(Color.fill)
-//                    .clipShape(RoundedRectangle(cornerRadius: 25))
-//                    .padding(.bottom, 5)
-//                    .padding(.leading, 10)
-//                    
-//                    VStack {
-//                        HStack {
-//                            
-//                            Spacer()
-//                            
-//                            Image(systemName: "drop.fill")
-//                            
-//                            Text("Water Content")
-//                                .font(.headline)
-//                                .bold()
-//                            
-//                            Spacer()
-//                        }
-//                        .foregroundStyle(.black)
-//                        .opacity(0.5)
-//                        .padding(.vertical)
-////                        .border(.black)
-//                        
-//                        Text("0.3 g/m\u{00B3}")
-//                            .font(.largeTitle)
-//                            .fontWeight(.medium)
-//                            .frame(maxWidth: .infinity, alignment: .topLeading)
-//                            .padding(.horizontal)
-//                            .foregroundStyle(.testText)
-//                            .padding(.top, -5)
-//                        
-//                        Spacer()
-//                        
-//                        Text("Liquid")
-//                            .foregroundStyle(.testText)
-//                            .font(.headline)
-//                            .fontWeight(.bold)
-//                            .frame(maxWidth: .infinity, alignment: .leading)
-//                            .padding(.horizontal)
-//                        
-//                        Text("Low - Medium")
-//                            .foregroundStyle(.testText)
-//                            .font(.subheadline)
-//                            .fontWeight(.semibold)
-//                            .padding(.bottom, 20)
-//                            .frame(maxWidth: .infinity, alignment: .leading)
-//                            .padding(.horizontal)
-//                        
-//                        
-//                    }
-////                    .frame(width: 175, height: 175)
-//                    .aspectRatio(1.0, contentMode: .fit)
-//                    .background(Color.fill)
-//                    .clipShape(RoundedRectangle(cornerRadius: 25))
-//                    .padding(.top, 5)
-//                    .padding(.leading, 10)
-//                }
-////                .padding(.leading, 5)
-//                
-//            }
-//            .padding()
-////            .frame(height: 400)
-//        }
         
         VStack(spacing: 10) {
             Text("The Cumulus cloud stays at low altitudes with potential to go higher, has a low precipitation chance, and has a low to medium Liquid Water Content (LWC).")

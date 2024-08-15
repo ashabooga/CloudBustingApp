@@ -10,7 +10,11 @@ import SwiftUI
 struct CloudListView: View {
     
     @StateObject var cloudListViewModel: CloudListViewModel
+    @ObservedObject var userViewModel: UserViewModel
+    
     @State private var searchText = ""
+    @State private var isShowingDeleteBothActionSheet: Bool = false
+    @State private var isShowingDeleteActionSheet: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -39,7 +43,62 @@ struct CloudListView: View {
                                     EmptyView()
                                 }.opacity(0)
                                 
-                                CloudListRowView(item: cloudListItem)
+                                CloudListRowView(item: cloudListItem, cloudListViewModel: cloudListViewModel, userViewModel: userViewModel)
+                            }
+                            .swipeActions(edge: .trailing) {
+                                Button {
+                                    isShowingDeleteBothActionSheet = true
+                                } label: {
+                                    Image(systemName: "trash")
+                                }
+                                .tint(.red)
+                            }
+                            .contextMenu {
+                                Button(role: .destructive) {
+                                    cloudListViewModel.removeCloud(withID: cloudListItem.id)
+                                } label: {
+                                    Label("Remove from List", systemImage: "minus.circle")
+                                        .foregroundStyle(.red)
+                                }
+                                
+                                Divider()
+                                
+                                Button(role: .destructive) {
+                                    userViewModel.removeFromCollection(withID: cloudListItem.id)
+                                } label: {
+                                    Label("Delete from Library", systemImage: "trash")
+                                        .foregroundStyle(.red)
+                                }
+                                
+                                Button {
+                                    print("Add to List")
+                                } label: {
+                                    Label("Add to a CloudList...", systemImage: "text.badge.plus")
+                                }
+
+                            } preview: {
+                                destinationView(for: cloudListItem)
+                            }
+                            .confirmationDialog(cloudListItem.isScanned ? "Would you like to remove this cloud from this cloudlist or delete it from your library and all cloudlists?" : "Would you like to remove this cloud from this cloudlist?", isPresented: $isShowingDeleteBothActionSheet) {
+                                Button(role: .destructive) {
+                                    cloudListViewModel.removeCloud(withID: cloudListItem.id)
+                                } label: {
+                                    Text("Remove from This CloudList")
+                                }
+                                
+                                if cloudListItem.isScanned {
+                                    
+                                    Button(role: .destructive) {
+                                        userViewModel.removeFromCollection(withID: cloudListItem.id)
+                                    } label: {
+                                        Text("Delete from Library")
+                                    }
+                                }
+                            }
+                            .onAppear {
+                                guard let window = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first else { return }
+                                
+                                window.overrideUserInterfaceStyle = .dark
                             }
                             
                             
@@ -82,7 +141,7 @@ struct CloudListHeaderSectionView: View {
                         Rectangle()
                             .aspectRatio(1, contentMode: .fit)
                             .foregroundStyle(.clear)
-                            .frame(width: 225)
+                            .frame(width: 250)
                             .overlay {
                                 Image(cloudList.clouds[0].cloud.displayImage)
                                     .resizable()
@@ -112,6 +171,8 @@ struct CloudListHeaderSectionView: View {
 struct CloudListRowView: View {
     
     var item: CloudListItem
+    @ObservedObject var cloudListViewModel: CloudListViewModel
+    @ObservedObject var userViewModel: UserViewModel
     
     var body: some View {
         
@@ -148,11 +209,33 @@ struct CloudListRowView: View {
                     .foregroundStyle(.highlight)
             }
             
-            Button(action: {
+            Menu {
+                Button(role: .destructive) {
+                    cloudListViewModel.removeCloud(withID: item.id)
+                } label: {
+                    Label("Remove from List", systemImage: "minus.circle")
+                        .foregroundStyle(.red)
+                }
                 
-            }, label: {
+                Divider()
+                
+                Button(role: .destructive) {
+                    userViewModel.removeFromCollection(withID: item.id)
+                } label: {
+                    Label("Delete from Library", systemImage: "trash")
+                        .foregroundStyle(.red)
+                }
+                
+                Button {
+                    print("Add to List")
+                } label: {
+                    Label("Add to a CloudList...", systemImage: "text.badge.plus")
+                }
+
+            } label: {
                 Image(systemName: "ellipsis")
-            })
+                    .foregroundStyle(.testText)
+            }
         }
         
     }
@@ -169,5 +252,5 @@ func destinationView(for item: CloudListItem) -> some View {
 }
 
 #Preview {
-    CloudListView(cloudListViewModel: CloudListViewModel(cloudList: UserModel.exampleUser.cloudLists[0]))
+    CloudListView(cloudListViewModel: CloudListViewModel(cloudList: UserModel.exampleUser.cloudLists[0]), userViewModel: UserViewModel())
 }

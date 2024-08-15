@@ -15,8 +15,16 @@ class CloudListViewModel: ObservableObject {
         self.cloudList = cloudList
     }
  
-    func addCloud(cloud: Cloud) {
-        
+    func addCloud(_ cloud: CloudModel) {
+        cloudList.addCloud(cloud)
+    }
+    
+    func addCloud(_ scanAttempt: ScanAttemptModel) {
+        cloudList.addScanAttempt(scanAttempt)
+    }
+    
+    func removeCloud(withID id: UUID) {
+        cloudList.removeCloud(withID: id)
     }
     
 }
