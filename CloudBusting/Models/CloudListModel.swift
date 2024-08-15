@@ -63,7 +63,7 @@ struct CloudListModel: Identifiable {
     
     static let ExampleCloudList1: CloudListModel = CloudListModel(
         id: UUID(),
-        title: "My list!",
+        title: "My favorite clouds",
         clouds: [
             .scanAttempt(ScanAttemptModel(id: UUID(), imageName: "Cindy-Otter", dateTime: Date(), cloudIdentified: CloudModel.Cumulus, displayImage: "Cindy-Otter")),
             .scanAttempt(ScanAttemptModel(id: UUID(), imageName: "Cumulus7", dateTime: Date(), cloudIdentified: CloudModel.Cumulus, displayImage: "Cumulus7")),
@@ -77,7 +77,7 @@ struct CloudListModel: Identifiable {
     
     static let ExampleCloudList2: CloudListModel = CloudListModel(
         id: UUID(),
-        title: "My list!",
+        title: "I dedicate this list to Pudding <3",
         clouds: [
             .scanAttempt(ScanAttemptModel(id: UUID(), imageName: "Cumulus7", dateTime: Date(), cloudIdentified: CloudModel.Cumulus, displayImage: "Cumulus7")),
             .cloud(CloudModel.Cumulus),
@@ -93,7 +93,7 @@ struct CloudListModel: Identifiable {
     
     static let ExampleCloudList3: CloudListModel = CloudListModel(
         id: UUID(),
-        title: "My list!",
+        title: "some that are okay",
         clouds: [
             .scanAttempt(ScanAttemptModel(id: UUID(), imageName: "Cumulus5", dateTime: Date(), cloudIdentified: CloudModel.Cumulus, displayImage: "Cumulus7")),
             .cloud(CloudModel.Mamma),
@@ -105,7 +105,7 @@ struct CloudListModel: Identifiable {
     
     static let ExampleCloudList4: CloudListModel = CloudListModel(
         id: UUID(),
-        title: "My list!",
+        title: "Da Best 😎",
         clouds: [
             .cloud(CloudModel.Mamma),
             .cloud(CloudModel.Cumulus),

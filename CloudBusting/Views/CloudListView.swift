@@ -29,16 +29,8 @@ struct CloudListView: View {
                     
                     
                     List {
-                        
-                        Section {
-                            titleView
-                                .padding(.vertical)
-                                .shadow(radius: 10)
-                        
-                        }
-                        .listRowBackground(Color.clear)
-                        .listSectionSeparator(.hidden)
-                        
+
+                        CloudListHeaderSectionView(cloudList: cloudListViewModel.cloudList)
                         
                         ForEach(searchResults, id: \.id) { cloudListItem in
                             
@@ -59,6 +51,7 @@ struct CloudListView: View {
                         
                     }
                     .listStyle(.plain)
+                    .searchable(text: $searchText, placement: .toolbar)
                 }
             }
         }
@@ -69,6 +62,49 @@ struct CloudListView: View {
             return cloudListViewModel.cloudList.clouds
         } else {
             return cloudListViewModel.cloudList.clouds.filter { $0.cloud.name.contains(searchText) }
+        }
+    }
+}
+
+struct CloudListHeaderSectionView: View {
+    
+    @Environment(\.isSearching) private var isSearching
+    var cloudList: CloudListModel
+    
+    var body: some View {
+        if !isSearching {
+            Section {
+                HStack {
+                    
+                    Spacer()
+                    
+                    VStack {
+                        Rectangle()
+                            .aspectRatio(1, contentMode: .fit)
+                            .foregroundStyle(.clear)
+                            .frame(width: 225)
+                            .overlay {
+                                Image(cloudList.clouds[0].cloud.displayImage)
+                                    .resizable()
+                                    .scaledToFill()
+                            }
+                            .clipShape(RoundedRectangle(cornerRadius: 15))
+                            
+                        Text(cloudList.title)
+                            .font(.title3)
+                            .bold()
+                            .padding(.top)
+                        
+                    }
+                    
+                    Spacer()
+                }
+                    .padding(.vertical)
+                    .shadow(radius: 10)
+                
+            }
+            .listRowBackground(Color.clear)
+            .listSectionSeparator(.hidden)
         }
     }
 }
@@ -130,40 +166,6 @@ func destinationView(for item: CloudListItem) -> some View {
     case .scanAttempt(let scanAttempt):
         ScannedCloudInfoCardView(scanAttempt: scanAttempt)
     }
-}
-
-extension CloudListView {
-    
-    private var titleView: some View {
-        
-        
-        HStack {
-            
-            Spacer()
-            
-            VStack {
-                Rectangle()
-                    .aspectRatio(1, contentMode: .fit)
-                    .foregroundStyle(.clear)
-                    .frame(width: 225)
-                    .overlay {
-                        Image(cloudListViewModel.cloudList.clouds[0].cloud.displayImage)
-                            .resizable()
-                            .scaledToFill()
-                    }
-                    .clipShape(RoundedRectangle(cornerRadius: 15))
-                    
-                Text(cloudListViewModel.cloudList.title)
-                    .font(.title3)
-                    .bold()
-                    .padding(.top)
-                
-            }
-            
-            Spacer()
-        }
-    }
-    
 }
 
 #Preview {
