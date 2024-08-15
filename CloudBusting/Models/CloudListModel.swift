@@ -3,6 +3,15 @@ import Foundation
 enum CloudListItem {
     case cloud(CloudModel)
     case scanAttempt(ScanAttemptModel)
+    
+    var id: UUID {
+        switch self {
+        case .cloud(let model):
+            return model.id
+        case .scanAttempt(let model):
+            return model.id
+        }
+    }
 
     var cloud: Cloud {
         switch self {

@@ -14,6 +14,8 @@
 		0E167D2A2C31E06300B9263C /* CloudModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E167D292C31E06300B9263C /* CloudModel.swift */; };
 		0E3264982C3D241200BF4DBE /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3264972C3D241200BF4DBE /* CameraView.swift */; };
 		0E6896A42C563AEE00FBDBC4 /* StretchyHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6896A32C563AEE00FBDBC4 /* StretchyHeaderView.swift */; };
+		0E6927E42C6E4EF4008ACDBD /* CloudListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6927E32C6E4EF4008ACDBD /* CloudListView.swift */; };
+		0E6927E62C6E5002008ACDBD /* CloudListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E6927E52C6E5002008ACDBD /* CloudListViewModel.swift */; };
 		0E7971DD2C6804ED00E27139 /* WeatherContentViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7971DC2C6804ED00E27139 /* WeatherContentViews.swift */; };
 		0E7971E02C6A5CC800E27139 /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = 0E7971DF2C6A5CC800E27139 /* WrappingHStack */; };
 		0E7971E22C6BD18100E27139 /* CloudListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7971E12C6BD18100E27139 /* CloudListModel.swift */; };
@@ -41,6 +43,8 @@
 		0E167D292C31E06300B9263C /* CloudModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudModel.swift; sourceTree = "<group>"; };
 		0E3264972C3D241200BF4DBE /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		0E6896A32C563AEE00FBDBC4 /* StretchyHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StretchyHeaderView.swift; sourceTree = "<group>"; };
+		0E6927E32C6E4EF4008ACDBD /* CloudListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudListView.swift; sourceTree = "<group>"; };
+		0E6927E52C6E5002008ACDBD /* CloudListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudListViewModel.swift; sourceTree = "<group>"; };
 		0E7971DC2C6804ED00E27139 /* WeatherContentViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherContentViews.swift; sourceTree = "<group>"; };
 		0E7971E12C6BD18100E27139 /* CloudListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudListModel.swift; sourceTree = "<group>"; };
 		0E7971E32C6C0A2200E27139 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -114,6 +118,7 @@
 			children = (
 				0E8749A22C300D3400821646 /* HomeView.swift */,
 				0E8520172C50ED2300E161E4 /* UserLibraryView.swift */,
+				0E6927E32C6E4EF4008ACDBD /* CloudListView.swift */,
 				0E0833612C35455300FD73AB /* CloudInfoCardView.swift */,
 				0E3264972C3D241200BF4DBE /* CameraView.swift */,
 				0E8749B12C3052FE00821646 /* ArticleThumbnailButtonView.swift */,
@@ -145,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				0EF7B1F52C5A2B820056076B /* UserViewModel.swift */,
+				0E6927E52C6E5002008ACDBD /* CloudListViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -228,6 +234,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E3264982C3D241200BF4DBE /* CameraView.swift in Sources */,
+				0E6927E42C6E4EF4008ACDBD /* CloudListView.swift in Sources */,
 				0E8749A32C300D3400821646 /* HomeView.swift in Sources */,
 				0E0833622C35455300FD73AB /* CloudInfoCardView.swift in Sources */,
 				0E167D2A2C31E06300B9263C /* CloudModel.swift in Sources */,
@@ -240,6 +247,7 @@
 				0EF7B1F62C5A2B820056076B /* UserViewModel.swift in Sources */,
 				0E7971DD2C6804ED00E27139 /* WeatherContentViews.swift in Sources */,
 				0E8520162C502A5600E161E4 /* IconsAndSymbolsView.swift in Sources */,
+				0E6927E62C6E5002008ACDBD /* CloudListViewModel.swift in Sources */,
 				0E7971E42C6C0A2200E27139 /* MainView.swift in Sources */,
 				0E167D242C31B8C700B9263C /* ArticleModel.swift in Sources */,
 				0E6896A42C563AEE00FBDBC4 /* StretchyHeaderView.swift in Sources */,
