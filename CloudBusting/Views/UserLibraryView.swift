@@ -182,7 +182,7 @@ struct CloudListsListView: View {
             List {
                 ForEach(searchResults, id: \.id) { cloudList in
                     NavigationLink {
-                        EmptyView()
+                        CloudListView(cloudListViewModel: CloudListViewModel(cloudList: cloudList))
                     } label: {
                         CloudListsListRowView(cloudList: cloudList)
                     }

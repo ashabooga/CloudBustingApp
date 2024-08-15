@@ -12,6 +12,15 @@ enum CloudListItem {
             return model.id
         }
     }
+    
+    var isScanned: Bool {
+        switch self {
+        case .cloud(let model):
+            return false
+        case .scanAttempt(let model):
+            return true
+        }
+    }
 
     var cloud: Cloud {
         switch self {
