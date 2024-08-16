@@ -280,7 +280,7 @@ extension UserLibraryView {
                 HStack {
                     Image(systemName: "cloud.fill")
                         .foregroundStyle(.highlight)
-                        .frame(maxWidth: 25)
+                        .frame(maxWidth: 30)
                     
                     Text("Your Clouds")
                         .foregroundStyle(.interactiveText)
@@ -296,7 +296,7 @@ extension UserLibraryView {
             
             
             Divider()
-                .padding(.leading, 35)
+                .padding(.leading, 40)
             
             
             NavigationLink {
@@ -307,7 +307,7 @@ extension UserLibraryView {
                     Image(systemName: "list.bullet.clipboard.fill")
                         .foregroundStyle(.highlight)
                         .foregroundStyle(.interactiveText)
-                        .frame(maxWidth: 25)
+                        .frame(maxWidth: 30)
                     
                     Text("Cloud Lists")
                         .foregroundStyle(.interactiveText)
@@ -323,7 +323,7 @@ extension UserLibraryView {
             }
 
             Divider()
-                .padding(.leading, 35)
+                .padding(.leading, 40)
                 .foregroundStyle(.interactiveSymbol)
             
             NavigationLink {
@@ -332,7 +332,7 @@ extension UserLibraryView {
                 HStack {
                     Image(systemName: "bookmark.fill")
                         .foregroundStyle(.highlight)
-                        .frame(maxWidth: 25)
+                        .frame(maxWidth: 30)
                     
                     Text("Saved Articles")
                         .padding(3)
@@ -348,7 +348,7 @@ extension UserLibraryView {
             }
 
             Divider()
-                .padding(.leading, 35)
+                .padding(.leading, 40)
         }
         .font(.title2)
         .fontWeight(.semibold)

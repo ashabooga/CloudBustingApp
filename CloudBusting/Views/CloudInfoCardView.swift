@@ -425,7 +425,8 @@ extension CloudInfoView {
 //                .frame(maxWidth: .infinity)
             }
         }
-        .padding()
+        .padding(.horizontal)
+        .padding(.bottom)
     }
     
     private var identificationTitle: some View {

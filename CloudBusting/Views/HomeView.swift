@@ -9,6 +9,8 @@ import SwiftUI
 
 struct HomeView: View {
     
+    @State private var searchText = ""
+    
     var body: some View {
         
         NavigationStack {
@@ -22,98 +24,124 @@ struct HomeView: View {
                 ], startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea()
                 
-                ScrollView {
-                    VStack {
-                        
-                        RoundedRectangle(cornerRadius: 10)
-                            .frame(width: 360, height: 50)
-                            .foregroundStyle(.bar)
-                            .shadow(radius: 2, y: 3)
-                            .padding(.bottom)
-                        
-                        HStack {
-                            Text("Popular Clouds")
-                                .foregroundStyle(.interactiveText)
-                            
-                            Image(systemName: "chevron.right")
-                                .font(.title2)
-                                .foregroundStyle(.interactiveSymbol)
-                            
-                            Spacer()
-                        }
-                        .font(.title)
-                        .bold()
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.leading, 25)
-                        
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            LazyHStack {
-                                ForEach(0..<10) { _ in
-                                    PopularCloudsIconView(cloud: CloudModel.Cumulus)
-                                }
-                                .padding(.horizontal, 5)
-                            }
-                            .scrollTargetLayout()
-                            .padding(.horizontal)
-                        }
-                        .scrollTargetBehavior(.viewAligned)
-                        
-                        Text("Cloud of the Day")
-                            .font(.title)
-                            .bold()
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.horizontal, 25)
-                            .padding(.top)
-                        
-                        
-                        NavigationLink {
-                            CloudInfoCardView(cloud: CloudModel.Cumulus)
-                        } label: {
-                            CloudOfTheDayThumbnailView(cloud: CloudModel.Mamma)
-                                .padding(.horizontal)
-                                .padding(.bottom)
-                        }
+                HomeViewSearchControllerView(searchText: $searchText)
+            }
+            .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search for a Cloud")
+            .navigationTitle("CloudBusting")
+        }
+    }
+}
 
-                        HStack {
-                            Text("Articles")
-                                .foregroundStyle(.interactiveText)
-                            
-                            Image(systemName: "chevron.right")
-                                .font(.title2)
-                                .foregroundStyle(.interactiveSymbol)
-                            
-                            Spacer()
-                        }
-                        .font(.title)
-                        .bold()
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.leading, 25)
-                        
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            LazyHStack {
-                                ForEach(0..<10) { _ in
-                                    ArticleThumbnailButtonView(article: ArticleModel.noArticle)
-                                }
-                                .padding(.horizontal, 5)
-                            }
-                            .scrollTargetLayout()
-                            .padding(.horizontal)
-                        }
-                        .scrollTargetBehavior(.viewAligned)
-                        
-                        
-                        Text("Cloud Forecast")
-                            .font(.title)
-                            .bold()
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.horizontal, 25)
-                            .padding(.top)
-                        
-                        Spacer()
-                    }
+struct HomeViewSearchControllerView: View {
+    
+    @Environment(\.isSearching) private var isSearching
+    @Binding var searchText: String
+    
+    var body: some View {
+        
+        if isSearching {
+            List {
+            }
+        } else {
+                        HomeViewContent()
+        }
+        
+    }
+    
+    var searchResults: [CloudModel] {
+        if searchText.isEmpty {
+            return []
+        } else {
+            return []
+        }
+    }
+}
+
+struct HomeViewContent: View {
+    var body: some View {
+        ScrollView {
+            VStack {
+                
+                HStack {
+                    Text("Popular Clouds")
+                        .foregroundStyle(.interactiveText)
+                    
+                    Image(systemName: "chevron.right")
+                        .font(.title2)
+                        .foregroundStyle(.interactiveSymbol)
+                    
+                    Spacer()
                 }
-                .navigationTitle("CloudBusting")
-            .navigationBarTitleDisplayMode(.large)
+                .font(.title)
+                .bold()
+                .padding(.leading, 25)
+                .padding(.top)
+                
+                ScrollView(.horizontal, showsIndicators: false) {
+                    LazyHStack {
+                        ForEach(0..<10) { _ in
+                            PopularCloudsIconView(cloud: CloudModel.Cumulus)
+                        }
+                        .padding(.horizontal, 5)
+                    }
+                    .scrollTargetLayout()
+                    .padding(.horizontal)
+                }
+                .scrollTargetBehavior(.viewAligned)
+                .padding(.bottom)
+                
+                Text("Cloud of the Day")
+                    .font(.title)
+                    .bold()
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal, 25)
+                    .padding(.top)
+                
+                
+                NavigationLink {
+                    CloudInfoCardView(cloud: CloudModel.Cumulus)
+                } label: {
+                    CloudOfTheDayThumbnailView(cloud: CloudModel.Mamma)
+                        .padding(.horizontal)
+                        .padding(.bottom)
+                }
+
+                HStack {
+                    Text("Articles")
+                        .foregroundStyle(.interactiveText)
+                    
+                    Image(systemName: "chevron.right")
+                        .font(.title2)
+                        .foregroundStyle(.interactiveSymbol)
+                    
+                    Spacer()
+                }
+                .font(.title)
+                .bold()
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.leading, 25)
+                
+                ScrollView(.horizontal, showsIndicators: false) {
+                    LazyHStack {
+                        ForEach(0..<10) { _ in
+//                            ArticleThumbnailButtonView(article: ArticleModel.noArticle)
+                        }
+                        .padding(.horizontal, 5)
+                    }
+                    .scrollTargetLayout()
+                    .padding(.horizontal)
+                }
+                .scrollTargetBehavior(.viewAligned)
+                
+                
+                Text("Cloud Forecast")
+                    .font(.title)
+                    .bold()
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal, 25)
+                    .padding(.top)
+                
+                Spacer()
             }
         }
     }
