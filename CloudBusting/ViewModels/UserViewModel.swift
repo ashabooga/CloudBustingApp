@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 class UserViewModel: ObservableObject {
     
@@ -31,6 +32,11 @@ class UserViewModel: ObservableObject {
     
     func removeFromCollection(withID id: UUID) {
         user.removeFromCollection(withID: id)
+        
+        for index in user.cloudLists.indices {
+            user.cloudLists[index].wipeCloud(withID: id)
+            print(user.cloudLists[index])
+        }
     }
     
     // MARK: - CloudLists Methods

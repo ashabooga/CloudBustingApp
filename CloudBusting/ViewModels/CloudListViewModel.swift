@@ -27,4 +27,8 @@ class CloudListViewModel: ObservableObject {
         cloudList.removeCloud(withID: id)
     }
     
+    func wipeCloud(withID id: UUID) {
+        cloudList.wipeCloud(withID: id)
+    }
+    
 }

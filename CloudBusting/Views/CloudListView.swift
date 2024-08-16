@@ -10,7 +10,7 @@ import SwiftUI
 struct CloudListView: View {
     
     @StateObject var cloudListViewModel: CloudListViewModel
-    @ObservedObject var userViewModel: UserViewModel
+    @EnvironmentObject var userViewModel: UserViewModel
     
     @State private var searchText = ""
     @State private var isShowingDeleteBothActionSheet: Bool = false
@@ -77,7 +77,9 @@ struct CloudListView: View {
                                         EmptyView()
                                     }.opacity(0)
                                     
-                                    CloudListRowView(item: cloudListItem, cloudListViewModel: cloudListViewModel, userViewModel: userViewModel)
+                                    CloudListRowView(item: cloudListItem)
+                                        .environmentObject(self.userViewModel)
+                                        .environmentObject(self.cloudListViewModel)
                                 }
                                 .swipeActions(edge: .trailing) {
                                     Button {
@@ -97,13 +99,16 @@ struct CloudListView: View {
                                     
                                     Divider()
                                     
-                                    Button(role: .destructive) {
-                                        userViewModel.removeFromCollection(withID: cloudListItem.id)
-                                    } label: {
-                                        Label("Delete from Library", systemImage: "trash")
-                                            .foregroundStyle(.red)
+                                    if cloudListItem.isScanned {
+                                        
+                                        Button(role: .destructive) {
+                                            userViewModel.removeFromCollection(withID: cloudListItem.id)
+                                        } label: {
+                                            Label("Delete from Library", systemImage: "trash")
+                                                .foregroundStyle(.red)
+                                        }
                                     }
-                                    
+                                        
                                     Button {
                                         print("Add to List")
                                     } label: {
@@ -151,6 +156,7 @@ struct CloudListView: View {
                 }
             }
         }
+//        .environmentObject(cloudListViewModel)
     }
     
     var searchResults: [CloudListItem] {
@@ -175,36 +181,14 @@ struct CloudListHeaderSectionView: View {
                     Spacer()
                     
                     VStack {
-                        Rectangle()
-                            .aspectRatio(1, contentMode: .fit)
-                            .foregroundStyle(.clear)
-                            .frame(width: 250)
-                            .overlay {
-                                
-                                if cloudList.clouds.count == 0 {
-                                    ZStack {
-                                        Rectangle()
-                                            .foregroundStyle(Color.fill)
-                                        
-                                        Image(systemName: "cloud.fill")
-                                            .resizable()
-                                            .scaledToFit()
-                                            .padding(75)
-                                            .opacity(0.4)
-                                    }
-                                    
-                                } else {
-                                    Image(cloudList.clouds[0].cloud.displayImage)
-                                        .resizable()
-                                        .scaledToFill()
-                                }
-                            }
-                            .clipShape(RoundedRectangle(cornerRadius: 15))
+                        CloudListImageView(cloudList: cloudList)
+                            .frame(width: 225)
                             
                         Text(cloudList.title)
                             .font(.title3)
                             .bold()
                             .padding(.top)
+                            .foregroundStyle(.testText)
                         
                     }
                     
@@ -223,8 +207,8 @@ struct CloudListHeaderSectionView: View {
 struct CloudListRowView: View {
     
     var item: CloudListItem
-    @ObservedObject var cloudListViewModel: CloudListViewModel
-    @ObservedObject var userViewModel: UserViewModel
+    @EnvironmentObject var cloudListViewModel: CloudListViewModel
+    @EnvironmentObject var userViewModel: UserViewModel
     
     var body: some View {
         
@@ -271,11 +255,13 @@ struct CloudListRowView: View {
                 
                 Divider()
                 
-                Button(role: .destructive) {
-                    userViewModel.removeFromCollection(withID: item.id)
-                } label: {
-                    Label("Delete from Library", systemImage: "trash")
-                        .foregroundStyle(.red)
+                if item.isScanned {
+                    Button(role: .destructive) {
+                        userViewModel.removeFromCollection(withID: item.id)
+                    } label: {
+                        Label("Delete from Library", systemImage: "trash")
+                            .foregroundStyle(.red)
+                    }
                 }
                 
                 Button {
@@ -293,6 +279,105 @@ struct CloudListRowView: View {
     }
 }
 
+struct CloudListImageView: View {
+    
+    var cloudList: CloudListModel
+    
+    var body: some View {
+        
+        Rectangle()
+            .aspectRatio(1, contentMode: .fit)
+            .foregroundStyle(.clear)
+            .overlay {
+                if cloudList.clouds.count == 0 {
+                    ZStack {
+                        Rectangle()
+                            .foregroundStyle(Color.fill)
+                        
+                        GeometryReader { geometry in
+                            Image(systemName: "cloud.fill")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: geometry.size.width * 0.5)
+                                .opacity(0.4)
+                                .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
+                        }
+
+                    }
+                } else if cloudList.clouds.count < 4 {
+                    
+                    Image(cloudList.clouds[0].cloud.displayImage)
+                        .resizable()
+                        .scaledToFill()
+                    
+                } else {
+                    
+                    ImageCollageView(cloudList: cloudList)
+
+                    
+                }
+            }
+            .clipShape(RoundedRectangle(cornerRadius: 10))
+    }
+}
+
+struct ImageCollageView: View {
+    var cloudList: CloudListModel
+    
+    var body: some View {
+        VStack(spacing: 0) {
+            HStack(spacing: 0) {
+                
+                Rectangle()
+                    .aspectRatio(1, contentMode: .fit)
+                    .foregroundStyle(.clear)
+                    .overlay {
+                        Image(cloudList.clouds[0].cloud.displayImage)
+                            .resizable()
+                            .scaledToFill()
+                    }
+                    .clipShape(Rectangle())
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                
+                Rectangle()
+                    .aspectRatio(1, contentMode: .fit)
+                    .foregroundStyle(.clear)
+                    .overlay {
+                        Image(cloudList.clouds[1].cloud.displayImage)
+                            .resizable()
+                            .scaledToFill()
+                    }
+                    .clipShape(Rectangle())
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            }
+            
+            HStack(spacing: 0) {
+                Rectangle()
+                    .aspectRatio(1, contentMode: .fit)
+                    .foregroundStyle(.clear)
+                    .overlay {
+                        Image(cloudList.clouds[2].cloud.displayImage)
+                            .resizable()
+                            .scaledToFill()
+                    }
+                    .clipShape(Rectangle())
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                
+                Rectangle()
+                    .aspectRatio(1, contentMode: .fit)
+                    .foregroundStyle(.clear)
+                    .overlay {
+                        Image(cloudList.clouds[3].cloud.displayImage)
+                            .resizable()
+                            .scaledToFill()
+                    }
+                    .clipShape(Rectangle())
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            }
+        }
+    }
+}
+
 @ViewBuilder
 func destinationView(for item: CloudListItem) -> some View {
     switch item {
@@ -304,5 +389,6 @@ func destinationView(for item: CloudListItem) -> some View {
 }
 
 #Preview {
-    CloudListView(cloudListViewModel: CloudListViewModel(cloudList: CloudListModel.ExampleCloudList2), userViewModel: UserViewModel())
+    CloudListView(cloudListViewModel: CloudListViewModel(cloudList: CloudListModel.ExampleCloudList5))
+        .environmentObject(UserViewModel(user: UserModel.exampleUser))
 }

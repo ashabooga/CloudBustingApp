@@ -69,6 +69,10 @@ struct CloudListModel: Identifiable {
         clouds.removeAll{ $0.listID == id }
     }
     
+    mutating func wipeCloud(withID id: UUID) {
+        clouds.removeAll { $0.id == id }
+    }
+    
     
     static let ExampleCloudList1: CloudListModel = CloudListModel(
         id: UUID(),

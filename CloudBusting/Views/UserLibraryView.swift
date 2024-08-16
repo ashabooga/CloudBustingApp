@@ -9,7 +9,7 @@ import SwiftUI
 
 struct UserLibraryView: View {
     
-    @ObservedObject var userViewModel: UserViewModel
+    @EnvironmentObject var userViewModel: UserViewModel
     
     var body: some View {
         NavigationStack {
@@ -34,6 +34,8 @@ struct UserLibraryView: View {
                             RecentlyScannedTitle
                         }
 
+                        
+                        
                         
                         LazyVGrid(columns: [GridItem(.flexible(), spacing: 20), GridItem(.flexible(), spacing: 20)], spacing: 20) {
                             ForEach(userViewModel.user.scanAttempts, id: \.id) { scanAttempt in
@@ -86,7 +88,7 @@ struct RecentlyScannedIconView: View {
 
 struct YourCloudsListView: View {
     
-    @ObservedObject var userViewModel: UserViewModel
+    @EnvironmentObject var userViewModel: UserViewModel
     @State private var searchText = ""
 
     var body: some View {
@@ -171,7 +173,7 @@ struct YourCloudsListRowView: View {
 }
 
 struct CloudListsListView: View {
-    @ObservedObject var userViewModel: UserViewModel
+    @EnvironmentObject var userViewModel: UserViewModel
     @State private var searchText = ""
 
     var body: some View {
@@ -181,7 +183,8 @@ struct CloudListsListView: View {
             List {
                 ForEach(searchResults, id: \.id) { cloudList in
                     NavigationLink {
-                        CloudListView(cloudListViewModel: CloudListViewModel(cloudList: cloudList), userViewModel: userViewModel)
+                        CloudListView(cloudListViewModel: CloudListViewModel(cloudList: cloudList))
+                            .environmentObject(self.userViewModel)
                     } label: {
                         CloudListsListRowView(cloudList: cloudList)
                     }
@@ -249,11 +252,9 @@ struct CloudListsListRowView: View {
     
     var body: some View {
         HStack {
-            Image(cloudList.clouds.first?.cloud.displayImage ?? "Cindy-Otter")
-                .resizable()
+            CloudListImageView(cloudList: cloudList)
                 .frame(width: 75, height: 75)
-                .scaledToFill()
-                .clipShape(RoundedRectangle(cornerRadius: 5))
+//                .clipShape(RoundedRectangle(cornerRadius: 5))
             
             VStack(alignment: .leading) {
                 Text(cloudList.title)
@@ -273,14 +274,15 @@ extension UserLibraryView {
         VStack {
             
             NavigationLink {
-                YourCloudsListView(userViewModel: userViewModel)
+                YourCloudsListView()
+                    .environmentObject(self.userViewModel)
             } label: {
                 HStack {
                     Image(systemName: "cloud.fill")
                         .foregroundStyle(.highlight)
+                        .frame(maxWidth: 25)
                     
                     Text("Your Clouds")
-                        .padding(3)
                         .foregroundStyle(.interactiveText)
                     
                     Spacer()
@@ -289,25 +291,25 @@ extension UserLibraryView {
                         .foregroundStyle(.interactiveSymbol)
                 }
                 .padding(.vertical, 5)
-                .padding(.leading, 15)
                 .padding(.trailing)
             }
             
             
             Divider()
-                .padding(.leading, 50)
+                .padding(.leading, 35)
             
             
             NavigationLink {
-                CloudListsListView(userViewModel: userViewModel)
+                CloudListsListView()
+                    .environmentObject(self.userViewModel)
             } label: {
                 HStack {
                     Image(systemName: "list.bullet.clipboard.fill")
                         .foregroundStyle(.highlight)
                         .foregroundStyle(.interactiveText)
+                        .frame(maxWidth: 25)
                     
                     Text("Cloud Lists")
-                        .padding(3)
                         .foregroundStyle(.interactiveText)
                     
                     Spacer()
@@ -317,12 +319,11 @@ extension UserLibraryView {
                         
                 }
                 .padding(.vertical, 5)
-                .padding(.leading, 17)
                 .padding(.trailing)
             }
 
             Divider()
-                .padding(.leading, 50)
+                .padding(.leading, 35)
                 .foregroundStyle(.interactiveSymbol)
             
             NavigationLink {
@@ -331,6 +332,7 @@ extension UserLibraryView {
                 HStack {
                     Image(systemName: "bookmark.fill")
                         .foregroundStyle(.highlight)
+                        .frame(maxWidth: 25)
                     
                     Text("Saved Articles")
                         .padding(3)
@@ -342,16 +344,16 @@ extension UserLibraryView {
                         .foregroundStyle(.interactiveSymbol)
                 }
                 .padding(.vertical, 5)
-                .padding(.leading, 18)
                 .padding(.trailing)
             }
 
             Divider()
-                .padding(.leading, 50)
+                .padding(.leading, 35)
         }
         .font(.title2)
         .fontWeight(.semibold)
         .contentShape(Rectangle())
+        .padding(.leading)
     }
     
 }
@@ -375,6 +377,7 @@ extension UserLibraryView {
 }
 
 #Preview {
-    UserLibraryView(userViewModel: UserViewModel(user: UserModel.exampleUser))
+    UserLibraryView()
+        .environmentObject(UserViewModel(user: UserModel.exampleUser))
 //    YourCloudsListView(user: UserModel.exampleUser)
 }

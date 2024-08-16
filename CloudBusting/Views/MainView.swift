@@ -26,7 +26,8 @@ struct MainView: View {
                     Label("Camera", systemImage: "camera.viewfinder")
                 }
             
-            UserLibraryView(userViewModel: userViewModel)
+            UserLibraryView()
+                .environmentObject(self.userViewModel)
                 .tabItem {
                     Label("Library", systemImage: "square.stack.fill")
                 }
