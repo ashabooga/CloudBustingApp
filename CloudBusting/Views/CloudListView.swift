@@ -33,84 +33,121 @@ struct CloudListView: View {
                     
                     
                     List {
-
+                        
                         CloudListHeaderSectionView(cloudList: cloudListViewModel.cloudList)
                         
-                        ForEach(searchResults, id: \.id) { cloudListItem in
+                        if cloudListViewModel.cloudList.clouds.count == 0 {
                             
-                            ZStack {
-                                NavigationLink(destination: destinationView(for: cloudListItem)) {
-                                    EmptyView()
-                                }.opacity(0)
+                            NavigationLink {
+                                EmptyView()
+                            } label: {
                                 
-                                CloudListRowView(item: cloudListItem, cloudListViewModel: cloudListViewModel, userViewModel: userViewModel)
+                                HStack {
+                                    
+                                    Rectangle()
+                                        .aspectRatio(1, contentMode: .fit)
+                                        .foregroundStyle(Color.fill)
+                                        .frame(width: 75)
+                                        .overlay {
+                                            Image(systemName: "plus")
+                                                .resizable()
+                                                .scaledToFit()
+                                                .padding(25)
+                                                .bold()
+                                                .foregroundStyle(.highlight)
+                                        }
+                                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                                    
+                                    Text("Add a Cloud")
+                                        .padding(.leading)
+                                        .font(.headline)
+                                    
+                                }
                             }
-                            .swipeActions(edge: .trailing) {
-                                Button {
-                                    isShowingDeleteBothActionSheet = true
-                                } label: {
-                                    Image(systemName: "trash")
-                                }
-                                .tint(.red)
-                            }
-                            .contextMenu {
-                                Button(role: .destructive) {
-                                    cloudListViewModel.removeCloud(withID: cloudListItem.id)
-                                } label: {
-                                    Label("Remove from List", systemImage: "minus.circle")
-                                        .foregroundStyle(.red)
-                                }
+                            .listRowBackground(Color.clear)
+                            .listSectionSeparator(.visible, edges: .top)
+    
+                            
+                        } else {
+                        
+                            ForEach(searchResults, id: \.id) { cloudListItem in
                                 
-                                Divider()
-                                
-                                Button(role: .destructive) {
-                                    userViewModel.removeFromCollection(withID: cloudListItem.id)
-                                } label: {
-                                    Label("Delete from Library", systemImage: "trash")
-                                        .foregroundStyle(.red)
+                                ZStack {
+                                    NavigationLink(destination: destinationView(for: cloudListItem)) {
+                                        EmptyView()
+                                    }.opacity(0)
+                                    
+                                    CloudListRowView(item: cloudListItem, cloudListViewModel: cloudListViewModel, userViewModel: userViewModel)
                                 }
-                                
-                                Button {
-                                    print("Add to List")
-                                } label: {
-                                    Label("Add to a CloudList...", systemImage: "text.badge.plus")
+                                .swipeActions(edge: .trailing) {
+                                    Button {
+                                        isShowingDeleteBothActionSheet = true
+                                    } label: {
+                                        Image(systemName: "trash")
+                                    }
+                                    .tint(.red)
                                 }
-
-                            } preview: {
-                                destinationView(for: cloudListItem)
-                            }
-                            .confirmationDialog(cloudListItem.isScanned ? "Would you like to remove this cloud from this cloudlist or delete it from your library and all cloudlists?" : "Would you like to remove this cloud from this cloudlist?", isPresented: $isShowingDeleteBothActionSheet) {
-                                Button(role: .destructive) {
-                                    cloudListViewModel.removeCloud(withID: cloudListItem.id)
-                                } label: {
-                                    Text("Remove from This CloudList")
-                                }
-                                
-                                if cloudListItem.isScanned {
+                                .contextMenu {
+                                    Button(role: .destructive) {
+                                        cloudListViewModel.removeCloud(withID: cloudListItem.listID)
+                                    } label: {
+                                        Label("Remove from List", systemImage: "minus.circle")
+                                            .foregroundStyle(.red)
+                                    }
+                                    
+                                    Divider()
                                     
                                     Button(role: .destructive) {
                                         userViewModel.removeFromCollection(withID: cloudListItem.id)
                                     } label: {
-                                        Text("Delete from Library")
+                                        Label("Delete from Library", systemImage: "trash")
+                                            .foregroundStyle(.red)
+                                    }
+                                    
+                                    Button {
+                                        print("Add to List")
+                                    } label: {
+                                        Label("Add to a CloudList...", systemImage: "text.badge.plus")
+                                    }
+                                    
+                                } preview: {
+                                    destinationView(for: cloudListItem)
+                                }
+                                .confirmationDialog(cloudListItem.isScanned ? "Would you like to remove this cloud from this cloudlist or delete it from your library and all cloudlists?" : "Would you like to remove this cloud from this cloudlist?", isPresented: $isShowingDeleteBothActionSheet) {
+                                    Button(role: .destructive) {
+                                        cloudListViewModel.removeCloud(withID: cloudListItem.listID)
+                                    } label: {
+                                        Text("Remove from This CloudList")
+                                    }
+                                    
+                                    if cloudListItem.isScanned {
+                                        
+                                        Button(role: .destructive) {
+                                            userViewModel.removeFromCollection(withID: cloudListItem.id)
+                                        } label: {
+                                            Text("Delete from Library")
+                                        }
                                     }
                                 }
-                            }
-                            .onAppear {
-                                guard let window = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first else { return }
+                                .onAppear {
+                                    guard let window = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first else { return }
+                                    
+                                    window.overrideUserInterfaceStyle = .dark
+                                }
                                 
-                                window.overrideUserInterfaceStyle = .dark
+                                
+                                
+                                
                             }
-                            
-                            
-                            
-                            
+                            .listRowBackground(Color.clear)
+                            .listSectionSeparator(.visible, edges: .top)
                         }
-                        .listRowBackground(Color.clear)
-                        .listSectionSeparator(.visible, edges: .top)
                         
                     }
                     .listStyle(.plain)
-                    .searchable(text: $searchText, placement: .toolbar)
+                    .if(cloudListViewModel.cloudList.clouds.count > 0, content: { view in
+                        view.searchable(text: $searchText, placement: .toolbar)
+                    })
                 }
             }
         }
@@ -143,9 +180,24 @@ struct CloudListHeaderSectionView: View {
                             .foregroundStyle(.clear)
                             .frame(width: 250)
                             .overlay {
-                                Image(cloudList.clouds[0].cloud.displayImage)
-                                    .resizable()
-                                    .scaledToFill()
+                                
+                                if cloudList.clouds.count == 0 {
+                                    ZStack {
+                                        Rectangle()
+                                            .foregroundStyle(Color.fill)
+                                        
+                                        Image(systemName: "cloud.fill")
+                                            .resizable()
+                                            .scaledToFit()
+                                            .padding(75)
+                                            .opacity(0.4)
+                                    }
+                                    
+                                } else {
+                                    Image(cloudList.clouds[0].cloud.displayImage)
+                                        .resizable()
+                                        .scaledToFill()
+                                }
                             }
                             .clipShape(RoundedRectangle(cornerRadius: 15))
                             
@@ -211,7 +263,7 @@ struct CloudListRowView: View {
             
             Menu {
                 Button(role: .destructive) {
-                    cloudListViewModel.removeCloud(withID: item.id)
+                    cloudListViewModel.removeCloud(withID: item.listID)
                 } label: {
                     Label("Remove from List", systemImage: "minus.circle")
                         .foregroundStyle(.red)
@@ -244,13 +296,13 @@ struct CloudListRowView: View {
 @ViewBuilder
 func destinationView(for item: CloudListItem) -> some View {
     switch item {
-    case .cloud(let cloud):
+    case .cloud(let cloud, _):
         CloudInfoCardView(cloud: cloud)
-    case .scanAttempt(let scanAttempt):
+    case .scanAttempt(let scanAttempt, _):
         ScannedCloudInfoCardView(scanAttempt: scanAttempt)
     }
 }
 
 #Preview {
-    CloudListView(cloudListViewModel: CloudListViewModel(cloudList: UserModel.exampleUser.cloudLists[0]), userViewModel: UserViewModel())
+    CloudListView(cloudListViewModel: CloudListViewModel(cloudList: CloudListModel.ExampleCloudList2), userViewModel: UserViewModel())
 }
