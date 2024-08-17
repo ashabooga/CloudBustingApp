@@ -43,7 +43,7 @@ struct HomeViewSearchControllerView: View {
             List {
             }
         } else {
-                        HomeViewContent()
+           HomeViewContent()
         }
         
     }
@@ -80,9 +80,9 @@ struct HomeViewContent: View {
                 ScrollView(.horizontal, showsIndicators: false) {
                     LazyHStack {
                         ForEach(0..<10) { _ in
-                            PopularCloudsIconView(cloud: CloudModel.Cumulus)
+                            PopularCloudsView(cloud: CloudModel.Cumulus)
                         }
-                        .padding(.horizontal, 5)
+                        .padding(.horizontal, 3)
                     }
                     .scrollTargetLayout()
                     .padding(.horizontal)
@@ -101,7 +101,7 @@ struct HomeViewContent: View {
                 NavigationLink {
                     CloudInfoCardView(cloud: CloudModel.Cumulus)
                 } label: {
-                    CloudOfTheDayThumbnailView(cloud: CloudModel.Mamma)
+                    CloudOfTheDayView(cloud: CloudModel.Mamma)
                         .padding(.horizontal)
                         .padding(.bottom)
                 }
@@ -124,14 +124,16 @@ struct HomeViewContent: View {
                 ScrollView(.horizontal, showsIndicators: false) {
                     LazyHStack {
                         ForEach(0..<10) { _ in
-//                            ArticleThumbnailButtonView(article: ArticleModel.noArticle)
+                            ArticleThumbnailView(article: ArticleModel.noArticle)
+                                .frame(width: 200)
                         }
-                        .padding(.horizontal, 5)
+                        .padding(.horizontal, 3)
                     }
                     .scrollTargetLayout()
                     .padding(.horizontal)
                 }
                 .scrollTargetBehavior(.viewAligned)
+                .padding(.bottom)
                 
                 
                 Text("Cloud Forecast")
@@ -147,7 +149,7 @@ struct HomeViewContent: View {
     }
 }
 
-struct CloudOfTheDayThumbnailView: View {
+struct CloudOfTheDayView: View {
     
     let cloud: CloudModel
     
@@ -157,7 +159,6 @@ struct CloudOfTheDayThumbnailView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 350, height: 450)
-//                .offset(y: 20)
                 .clipped()
                 .glur(offset: 0.7, interpolation: 0.4)
             
@@ -171,11 +172,10 @@ struct CloudOfTheDayThumbnailView: View {
             }
         }
         .clipShape(RoundedRectangle(cornerRadius: 15))
-//        .shadow(radius: 15)
     }
 }
 
-struct PopularCloudsIconView: View {
+struct PopularCloudsView: View {
     
     var cloud: CloudModel
     
@@ -204,7 +204,6 @@ struct PopularCloudsIconView: View {
             
         }
         .clipShape(RoundedRectangle(cornerRadius: 15))
-//        .shadow(radius: 10)
     }
 }
 
